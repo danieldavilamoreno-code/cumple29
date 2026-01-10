@@ -117,57 +117,54 @@
 <body>
 
   <div class="contenedor">
-    <h1>Lo que vive en mí 🤍</h1>
-<p id="tipoDia" style="font-weight:600;"></p>
+    <h1>Para ti 🤍</h1>
 
-   <form action="https://forms.gle/EX6UtrGne9LuQbBP7" method="POST" target="hidden_iframe" onsubmit="enviarFormulario()">
+    <p id="tipoDia"></p>
+    <p id="mensajeDia"></p>
 
-  <input type="hidden" name="entry.111111111" id="tipoHidden">
-  
-  <textarea name="entry.222222222" placeholder="Escribe aquí lo que quieras guardar…"></textarea>
+    <form onsubmit="enviarFormulario(event)">
+      <input type="hidden" id="tipoHidden">
 
-  <button type="submit">Guardar</button>
-</form>
+      <textarea placeholder="Escribe aquí lo que quieras guardar…"></textarea>
 
-<iframe name="hidden_iframe" style="display:none;"></iframe>
-
-    <button class="volver" onclick="window.location.href='index.html'">
-      Volver a la página principal
-    </button>
+      <button type="submit">Guardar</button>
+    </form>
   </div>
 
-<script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const mensaje = document.getElementById("mensajeDia");
+      const tipoTexto = document.getElementById("tipoDia");
+      const tipoHidden = document.getElementById("tipoHidden");
 
-  document.addEventListener("DOMContentLoaded", function () {
-    const mensaje = document.getElementById("mensajeDia");
-    const tipoTexto = document.getElementById("tipoDia");
-    const tipoHidden = document.getElementById("tipoHidden");
+      const inicio = new Date("2026-01-10");
+      const hoy = new Date();
+      const diff = Math.floor((hoy - inicio) / (1000 * 60 * 60 * 24));
+      const dia = diff % 3;
 
-    const inicio = new Date("2026-01-10");
-    const hoy = new Date();
+      if (dia === 0) {
+        tipoTexto.innerHTML = "🎶 Hoy: una canción";
+        mensaje.innerHTML = "Guarda una canción que te acompañe 🤍";
+        tipoHidden.value = "Canción";
+      } else if (dia === 1) {
+        tipoTexto.innerHTML = "🤍 Hoy: una emoción";
+        mensaje.innerHTML = "Ponle nombre a lo que sientes, sin juzgarlo.";
+        tipoHidden.value = "Emoción";
+      } else {
+        tipoTexto.innerHTML = "🌙 Hoy: un recuerdo";
+        mensaje.innerHTML = "Conserva un recuerdo que te haga sonreír.";
+        tipoHidden.value = "Recuerdo";
+      }
+    });
 
-    const diff = Math.floor((hoy - inicio) / (1000 * 60 * 60 * 24));
-    const dia = diff % 3;
-
-    if (dia === 0) {
-      tipoTexto.innerHTML = "🎶 Hoy: una canción";
-      mensaje.innerHTML = "Guarda una canción que te acompañe 🤍";
-      tipoHidden.value = "Canción";
-    } else if (dia === 1) {
-      tipoTexto.innerHTML = "🤍 Hoy: una emoción";
-      mensaje.innerHTML = "Ponle nombre a lo que sientes, sin juzgarlo.";
-      tipoHidden.value = "Emoción";
-    } else {
-      tipoTexto.innerHTML = "🌙 Hoy: un recuerdo";
-      mensaje.innerHTML = "Conserva un recuerdo que te haga sonreír.";
-      tipoHidden.value = "Recuerdo";
+    function enviarFormulario(e) {
+      e.preventDefault();
+      alert("Guarda aquí los momentos que más valoras… prometo cuidarlos 🤍");
     }
-  });
+  </script>
 
-  function enviarFormulario() {
-    alert("Se guardaron correctamente los momentos que más valoras, prometo cuidarlos 🤍");
-  }
-</script>
+</body>
+
 
 </body>
 </html>
