@@ -110,9 +110,30 @@
   </div>
 
  <script>
-  const select = document.getElementById("tipo");
-  select.innerHTML = "<option>🎶 Una canción (PRUEBA)</option>";
+  document.addEventListener("DOMContentLoaded", function () {
+    const select = document.getElementById("tipo");
+
+    const inicio = new Date("2026-01-10");
+    const hoy = new Date();
+
+    const diff = Math.floor((hoy - inicio) / (1000 * 60 * 60 * 24));
+    const dia = diff % 3;
+
+    if (dia === 0) {
+      select.innerHTML = "<option>🎶 Una canción</option>";
+    } else if (dia === 1) {
+      select.innerHTML = "<option>🤍 Una emoción</option>";
+    } else {
+      select.innerHTML = "<option>🌙 Un recuerdo</option>";
+    }
+  });
+
+  function guardarMomento(e) {
+    e.preventDefault();
+    alert("Guarda aquí los momentos que más valoras… prometo cuidarlos.");
+  }
 </script>
+
 
 
 </body>
