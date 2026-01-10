@@ -109,3 +109,30 @@ button:hover {
   }
 </style>
 
+<style>
+  .botones button {
+    width: 100%;
+    margin: 8px 0;
+    padding: 14px;
+    border: none;
+    border-radius: 30px;
+    background: #c45a7a;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .botones button:hover {
+    background: #a84664;
+    transform: scale(1.03);
+  }
+
+  .botones button:disabled {
+    background: #e0b8c6;
+    cursor: not-allowed;
+    transform: none;
+  }
+</style>
+
+
