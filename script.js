@@ -1,6 +1,8 @@
 alert("El script SI está cargando");
 
-const fechaCumple = new Date(2026, 0, 26, 0, 0, 0);
+const fechaCumple = new Date();
+fechaCumple.setDate(fechaCumple.getDate() + 10);
+
 
 function actualizarContador() {
   const ahora = new Date();
@@ -19,3 +21,4 @@ function actualizarContador() {
 
 setInterval(actualizarContador, 1000);
 actualizarContador();
+
