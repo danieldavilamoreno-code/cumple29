@@ -80,14 +80,25 @@
       }
     });
 
-    function enviarFormulario(e) {
+  function enviarFormulario(e) {
     e.preventDefault();
 
     const texto = document.getElementById("textoRecuerdo").value;
 
-    console.log("Texto escrito:", texto);
+    // Guardar en localStorage
+    localStorage.setItem("recuerdo", texto);
+
     alert("Gracias por compartir un poco más sobre ti, lo valoro mucho 🤍");
   }
+
+  // Al cargar la página, recuperar lo guardado
+  window.onload = function () {
+    const guardado = localStorage.getItem("recuerdo");
+
+    if (guardado) {
+      document.getElementById("textoRecuerdo").value = guardado;
+    }
+  };
   </script>
 
 </body>
