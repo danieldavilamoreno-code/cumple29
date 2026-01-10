@@ -43,8 +43,10 @@ p {
 /* ===== CONTADOR (si lo usas) ===== */
 #contador {
   display: flex;
+  justify-content: center;   /* 👈 ESTO es lo que faltaba */
+  align-items: center;
   gap: 15px;
-  margin-bottom: 40px;
+  margin: 20px 0 40px;
 }
 
 #contador div {
@@ -112,4 +114,5 @@ button:disabled {
     transform: scale(1);
   }
 }
+
 
