@@ -67,4 +67,9 @@ window.enviarFormulario = async function (e) {
   if (texto === "") return;
 
   await addDoc(recuerdosRef, { texto });
-  docum
+  document.getElementById("textoRecuerdo").value = "";
+
+  cargarRecuerdos();
+};
+
+window.onload = cargarRecuerdos;
