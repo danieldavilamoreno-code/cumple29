@@ -106,9 +106,10 @@
     </button>
   </div>
 
- <script>
+<script>
   document.addEventListener("DOMContentLoaded", function () {
     const select = document.getElementById("tipo");
+    const mensaje = document.getElementById("mensajeDia");
 
     const inicio = new Date("2026-01-10");
     const hoy = new Date();
@@ -118,18 +119,22 @@
 
     if (dia === 0) {
       select.innerHTML = "<option>🎶 Una canción</option>";
+      mensaje.innerHTML = "Hoy guarda una canción que te guste 🤍";
     } else if (dia === 1) {
       select.innerHTML = "<option>🤍 Una emoción</option>";
+      mensaje.innerHTML = "Hoy ponle nombre a lo que sientes, sin juzgarlo.";
     } else {
       select.innerHTML = "<option>🌙 Un recuerdo</option>";
+      mensaje.innerHTML = "Hoy conserva un recuerdo que te haga sonreír.";
     }
   });
 
   function guardarMomento(e) {
     e.preventDefault();
-    alert("Guarda aquí los momentos que más valoras… prometo cuidarlos.");
+    alert("Guarda aquí los momentos que más valoras, prometo cuidarlos...");
   }
 </script>
+
 
 
 
