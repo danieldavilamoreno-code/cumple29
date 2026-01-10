@@ -119,6 +119,7 @@ button:disabled {
 /* ===== CAMPOS DE TEXTO ===== */
 input,
 textarea {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
   width: 100%;
   padding: 14px 16px;
   margin: 10px 0;
@@ -145,6 +146,7 @@ textarea {
   resize: none;
   min-height: 90px;
 }
+
 
 
 
