@@ -115,10 +115,12 @@
   }
 
   function borrarRecuerdo(index) {
+    const confirmar = confirm("¿Seguro que quieres borrar este recuerdo? 🤍");
+
+    if (!confirmar) return;
+
     let recuerdos = JSON.parse(localStorage.getItem("recuerdos")) || [];
-
-    recuerdos.splice(index, 1); // elimina uno
-
+    recuerdos.splice(index, 1);
     localStorage.setItem("recuerdos", JSON.stringify(recuerdos));
 
     mostrarRecuerdos();
