@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Lo que vive en mí 🤍</title>
+
+  <!-- Tipografías -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(180deg, #f6e9f7, #f7d6df);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #5a2a3a;
+    }
+
+    .contenedor {
+      background: rgba(255,255,255,0.65);
+      padding: 40px 30px;
+      border-radius: 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      max-width: 380px;
+      width: 90%;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 14px;
+      color: #7a4a5a;
+      margin-bottom: 20px;
+    }
+
+    select, textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+    }
+
+    textarea {
+      resize: none;
+      height: 80px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 15px;
+      padding: 14px;
+      border: none;
+      border-radius: 30px;
+      background: #c45a7a;
+      color: white;
+      font-size: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: #a84664;
+      transform: scale(1.03);
+    }
+
+    .volver {
+      margin-top: 15px;
+      background: transparent;
+      color: #a84664;
+      border: none;
+      font-size: 13px;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="contenedor">
+    <h1>Lo que vive en mí 🤍</h1>
+    <p>
+      Hoy no te pido respuestas.<br>
+      Solo que guardes lo que sientes.
+    </p>
+
+    <form onsubmit="guardarMomento(event)">
+      <select required>
+        <option value="">Hoy quiero compartir…</option>
+        <option>🎶 Una canción</option>
+        <option>🤍 Una emoción</option>
+        <option>🌙 Un recuerdo</option>
+      </select>
+
+      <textarea placeholder="Escribe aquí lo que quieras guardar…"></textarea>
+
+      <button type="submit">Guardar</button>
+    </form>
+
+    <button class="volver" onclick="window.location.href='index.html'">
+      Volver a la página principal
+    </button>
+  </div>
+
+  <script>
+    function guardarMomento(e) {
+      e.preventDefault();
+      alert("Guarda aquí los momentos que más valoras… prometo cuidarlos.");
+    }
+  </script>
+
+</body>
+</html>
