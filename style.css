@@ -79,9 +79,9 @@ button:hover {
   }
 
   .contenedor {
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.75);
     padding: 40px 30px;
-    border: 1px solid rgba(180, 120, 160, 0.25);
+    border: 1px solid rgba(180, 120, 160, 0.4);
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     max-width: 380px;
     width: 90%;
@@ -136,6 +136,7 @@ button:hover {
     transform: none;
   }
 </style>
+
 
 
 
