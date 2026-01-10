@@ -1,7 +1,7 @@
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(180deg, #fdfbfb, #f1f1f1);
+  background: linear-gradient(135deg, #a84664, #7a2e45);
   color: #333;
 }
 
@@ -59,8 +59,7 @@ button {
 }
 
 button:hover {
-  transform: scale(1.03);
-  opacity: 0.9;
+  background: linear-gradient(135deg, #7a2e45, #5e1f33);
 }
 
 <style>
@@ -134,6 +133,7 @@ button:hover {
     transform: none;
   }
 </style>
+
 
 
 
