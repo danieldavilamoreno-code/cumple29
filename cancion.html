@@ -42,6 +42,7 @@
     <p id="mensajeDia"></p>
 
     <form onsubmit="enviarFormulario(event)">
+      <div id="listaRecuerdos"></div>
       <input type="hidden" id="tipoHidden">
 
       <textarea id="textoRecuerdo" placeholder="Escribe aquí lo que quieras guardar…"></textarea>
@@ -80,24 +81,37 @@
       }
     });
 
+  function mostrarRecuerdos() {
+    const contenedor = document.getElementById("listaRecuerdos");
+    contenedor.innerHTML = "";
+
+    let recuerdos = JSON.parse(localStorage.getItem("recuerdos")) || [];
+
+    recuerdos.forEach((texto, index) => {
+      const p = document.createElement("p");
+      p.textContent = "🤍 " + texto;
+      contenedor.appendChild(p);
+    });
+  }
+
   function enviarFormulario(e) {
     e.preventDefault();
 
-    const texto = document.getElementById("textoRecuerdo").value;
+    const texto = document.getElementById("textoRecuerdo").value.trim();
 
-    console.log("Texto capturado:", texto);
+    if (texto === "") return;
 
     let recuerdos = JSON.parse(localStorage.getItem("recuerdos")) || [];
-    console.log("Antes de guardar:", recuerdos);
-
     recuerdos.push(texto);
-
     localStorage.setItem("recuerdos", JSON.stringify(recuerdos));
 
-    console.log("Después de guardar:", localStorage.getItem("recuerdos"));
+    document.getElementById("textoRecuerdo").value = "";
 
-    alert("Intenté guardar 🤍");
+    mostrarRecuerdos();
   }
+
+  window.onload = mostrarRecuerdos;</script>
+
   </script>
 
 </body>
