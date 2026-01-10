@@ -63,23 +63,27 @@
 </head>
 
 <body>
+  
+  <div class="contenedor">
 
-  <h1>🎁 ¿Qué te haría ilusión?</h1>
-  <p>Puedes escribe lo que te gustaría recibir, hacer o vivir 🤍</p>
+    <h1>🎁 ¿Qué te haría ilusión?</h1>
+    <p>Puedes escribir lo que te gustaría recibir, hacer o vivir 🤍</p>
 
-  <form onsubmit="guardarRegalos(event)">
-    <input type="text" placeholder="Algo que te gustaría recibir">
-    <input type="text" placeholder="Algo que te gustaría hacer">
-    <input type="text" placeholder="Algo que deseas mucho">
-    <button type="submit">Guardar</button>
-    
-  </form>
+    <form onsubmit="guardarRegalos(event)">
+      <input type="text" placeholder="Algo que te gustaría recibir">
+      <input type="text" placeholder="Algo que te gustaría hacer">
+      <input type="text" placeholder="Algo que deseas mucho">
+      <button type="submit">Guardar</button>
+    </form>
 
-  <br><br>
-<a href="index.html">
-  <button type="button">⬅ Volver</button>
-</a>
+    <br>
 
+    <a href="index.html">
+      <button type="button">⬅ Volver</button>
+    </a>
+
+  </div>
+  
   <script>
     function guardarRegalos(e) {
       e.preventDefault();
