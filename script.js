@@ -1,4 +1,4 @@
-alert("El script SI está cargando");
+#alert("El script SI está cargando");
 
 const fechaCumple = new Date();
 fechaCumple.setDate(fechaCumple.getDate() + 10);
@@ -21,4 +21,5 @@ function actualizarContador() {
 
 setInterval(actualizarContador, 1000);
 actualizarContador();
+
 
