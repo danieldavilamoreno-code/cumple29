@@ -23,9 +23,15 @@
 
     const nombreArchivo = `amigo-${Date.now()}-${archivo.name}`;
 
-    const { error } = await supabaseClient.storage
-      .from("fotos-amigos")
-      .upload(nombreArchivo, archivo);
+    const texto = document.getElementById("mensaje").value;
+
+const { error } = await supabaseClient.storage
+  .from("fotos-amigos")
+  .upload(nombreArchivo, archivo, {
+    metadata: {
+      mensaje: texto
+    }
+  });
 
     if (error) {
       alert("Error: " + error.message);
