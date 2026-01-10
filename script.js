@@ -1,3 +1,6 @@
+// ===============================
+// ⏳ CUENTA ATRÁS
+// ===============================
 const fechaCumple = new Date(2026, 0, 26, 0, 0, 0);
 
 function actualizarContador() {
@@ -18,6 +21,10 @@ function actualizarContador() {
 setInterval(actualizarContador, 1000);
 actualizarContador();
 
+
+// ===============================
+// 🔒 BLOQUEO DE SECCIONES
+// ===============================
 const fechaInicio = new Date(2026, 0, 10);
 const hoy = new Date();
 const diasPasados = Math.floor((hoy - fechaInicio) / (1000 * 60 * 60 * 24));
@@ -25,14 +32,15 @@ const diasPasados = Math.floor((hoy - fechaInicio) / (1000 * 60 * 60 * 24));
 function controlarBloqueos() {
   const btnFotos = document.getElementById("btn-fotos");
 
+  // Seguridad: si el botón no existe, no hace nada
+  if (!btnFotos) return;
+
   if (diasPasados < 3) {
     btnFotos.disabled = true;
     btnFotos.textContent = "📸 Fotos (pronto)";
     btnFotos.style.opacity = "0.4";
+    btnFotos.style.cursor = "not-allowed";
   }
 }
 
 controlarBloqueos();
-
-
-
