@@ -113,14 +113,16 @@
     <h1>Lo que vive en mí 🤍</h1>
     <p id="mensajeDia"></p>
 
-    <form onsubmit="guardarMomento(event)">
-   
-      <select id="tipo"></select>
+   <form action="https://forms.gle/EX6UtrGne9LuQbBP7" method="POST" target="hidden_iframe" onsubmit="enviarFormulario()">
 
-      <textarea placeholder="Escribe aquí lo que quieras guardar…"></textarea>
+  <input type="hidden" name="entry.111111111" id="tipoHidden">
+  
+  <textarea name="entry.222222222" placeholder="Escribe aquí lo que quieras guardar…"></textarea>
 
-      <button type="submit">Guardar</button>
-    </form>
+  <button type="submit">Guardar</button>
+</form>
+
+<iframe name="hidden_iframe" style="display:none;"></iframe>
 
     <button class="volver" onclick="window.location.href='index.html'">
       Volver a la página principal
