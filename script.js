@@ -1,11 +1,10 @@
-// Fecha objetivo: 26 de enero 2026
+alert("El script SI está cargando");
+
 const fechaCumple = new Date(2026, 0, 26, 0, 0, 0);
 
 function actualizarContador() {
   const ahora = new Date();
   const diferencia = fechaCumple - ahora;
-
-  if (diferencia <= 0) return;
 
   const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
   const horas = Math.floor((diferencia / (1000 * 60 * 60)) % 24);
