@@ -30,8 +30,10 @@
       .upload(nombreArchivo, archivo);
 
     if (error) {
-      console.error(error);
-      alert("Ocurrió un error al guardar la foto 😢");
+        console.error("ERROR SUPABASE:", error);
+        alert("Error: " + error.message);
+      }
+
     } else {
       alert("Gracias 🤍 Tu recuerdo fue guardado con cariño.");
       document.getElementById("foto").value = "";
