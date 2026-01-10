@@ -50,6 +50,7 @@ p {
 }
 
 #contador div {
+  text-align: center;
   background: white;
   padding: 15px;
   border-radius: 12px;
@@ -114,5 +115,6 @@ button:disabled {
     transform: scale(1);
   }
 }
+
 
 
