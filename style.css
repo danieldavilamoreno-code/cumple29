@@ -1,7 +1,7 @@
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #a84664, #7a2e45);
+  background: linear-gradient(180deg, #f7e9f2, #fde2ea);
   color: #333;
 }
 
@@ -136,6 +136,7 @@ button:hover {
     transform: none;
   }
 </style>
+
 
 
 
