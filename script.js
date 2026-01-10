@@ -1,3 +1,4 @@
+// Fecha objetivo: 26 de enero 2026
 const fechaCumple = new Date(2026, 0, 26, 0, 0, 0);
 
 function actualizarContador() {
@@ -19,5 +20,3 @@ function actualizarContador() {
 
 setInterval(actualizarContador, 1000);
 actualizarContador();
-
-
