@@ -14,6 +14,32 @@
   const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 </script>
   
+<script>
+  async function subirFoto() {
+    const archivo = document.getElementById("foto").files[0];
+
+    if (!archivo) {
+      alert("Por favor, elige una foto 🤍");
+      return;
+    }
+
+    const nombreArchivo = `amigo-${Date.now()}-${archivo.name}`;
+
+    const { error } = await supabase.storage
+      .from("fotos-amigos")
+      .upload(nombreArchivo, archivo);
+
+    if (error) {
+      console.error(error);
+      alert("Ocurrió un error al guardar la foto 😢");
+    } else {
+      alert("Gracias 🤍 Tu recuerdo fue guardado con cariño.");
+      document.getElementById("foto").value = "";
+    }
+  }
+</script>
+
+  
 <body>
 
   <div class="fondo">
