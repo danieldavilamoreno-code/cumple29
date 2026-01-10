@@ -6,15 +6,15 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+ <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-  const supabaseUrl = https://vunamqmjquqqbjcuewfp.supabase.co;
-  const supabaseKey = sb_publishable_-8bixgoFqfyW7mBncbX5gw_lqfQepqg;
-  const supabase = supabase.createClient(supabaseUrl, supabaseKey);
-</script>
-  
-<script>
+  // 🔐 PEGA TUS DATOS REALES (ENTRE COMILLAS)
+  const supabaseUrl = "https://vunamqmjquqqbjcuewfp.supabase.co";
+  const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ1bmFtcW1qcXVxcWJqY3Vld2ZwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgwNjAzMDksImV4cCI6MjA4MzYzNjMwOX0.Az5YzL_lMnaxjaR-o399mLeOctRincjK-SJGV9yHoOA";
+
+  const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
   async function subirFoto() {
     const archivo = document.getElementById("foto").files[0];
 
@@ -25,7 +25,7 @@
 
     const nombreArchivo = `amigo-${Date.now()}-${archivo.name}`;
 
-    const { error } = await supabase.storage
+    const { error } = await supabaseClient.storage
       .from("fotos-amigos")
       .upload(nombreArchivo, archivo);
 
@@ -74,7 +74,7 @@
           disabled
         ></textarea>
 
-        <button type="button" onclick="alert('hola')">Enviar recuerdo</button>
+        <button type="button" onclick="subirFoto()">Enviar recuerdo</button>
 
       </div>
 
