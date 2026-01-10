@@ -3,6 +3,18 @@
 // ===============================
 const fechaCumple = new Date(2026, 0, 26, 0, 0, 0);
 
+function actualizarValor(id, nuevoValor) {
+  const el = document.getElementById(id);
+  if (!el) return;
+
+  if (el.textContent !== String(nuevoValor)) {
+    el.textContent = nuevoValor;
+    el.classList.remove("contador-animado");
+    void el.offsetWidth; // truco para reiniciar animación
+    el.classList.add("contador-animado");
+  }
+}
+
 function actualizarContador() {
   const ahora = new Date();
   const diferencia = fechaCumple - ahora;
@@ -12,10 +24,10 @@ function actualizarContador() {
   const minutos = Math.floor((diferencia / (1000 * 60)) % 60);
   const segundos = Math.floor((diferencia / 1000) % 60);
 
-  document.getElementById("dias").textContent = dias;
-  document.getElementById("horas").textContent = horas;
-  document.getElementById("minutos").textContent = minutos;
-  document.getElementById("segundos").textContent = segundos;
+  actualizarValor("dias", dias);
+  actualizarValor("horas", horas);
+  actualizarValor("minutos", minutos);
+  actualizarValor("segundos", segundos);
 }
 
 setInterval(actualizarContador, 1000);
@@ -44,3 +56,4 @@ function controlarBloqueos() {
 }
 
 controlarBloqueos();
+
