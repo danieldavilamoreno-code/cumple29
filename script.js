@@ -18,5 +18,21 @@ function actualizarContador() {
 setInterval(actualizarContador, 1000);
 actualizarContador();
 
+const fechaInicio = new Date(2026, 0, 10);
+const hoy = new Date();
+const diasPasados = Math.floor((hoy - fechaInicio) / (1000 * 60 * 60 * 24));
+
+function controlarBloqueos() {
+  const btnFotos = document.getElementById("btn-fotos");
+
+  if (diasPasados < 3) {
+    btnFotos.disabled = true;
+    btnFotos.textContent = "📸 Fotos (pronto)";
+    btnFotos.style.opacity = "0.4";
+  }
+}
+
+controlarBloqueos();
+
 
 
