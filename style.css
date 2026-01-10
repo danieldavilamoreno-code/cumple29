@@ -172,6 +172,64 @@ textarea {
   border-radius: 16px;
 }
 
+/* ===== FOTOS ===== */
+.subtitulo {
+  text-align: center;
+  opacity: 0.8;
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+.dias-selector {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.dias-selector button {
+  padding: 10px 18px;
+  border-radius: 20px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+.dias-selector button.activo {
+  background: rgba(255,255,255,0.15);
+}
+
+.dia {
+  display: none;
+  text-align: center;
+}
+
+.dia.visible {
+  display: block;
+}
+
+.mensaje {
+  max-width: 420px;
+  margin: 0 auto 20px;
+  opacity: 0.85;
+}
+
+.galeria {
+  height: 180px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-style: italic;
+}
+
+.galeria.vacia {
+  border: 2px dashed rgba(255,255,255,0.3);
+}
+
+.galeria.cerrada {
+  background: rgba(255,255,255,0.05);
+  opacity: 0.6;
+}
 
 
 
