@@ -73,6 +73,32 @@
 </main>
 
 <script>
+  // 🔐 FECHA DE INICIO (YYYY, MM-1, DD)
+  const fechaInicio = new Date(2026, 0, 15); // 15 enero 2026 (ejemplo)
+
+  const hoy = new Date();
+
+  // Calcular diferencia en días
+  const diffTiempo = hoy - fechaInicio;
+  const diaActual = Math.floor(diffTiempo / (1000 * 60 * 60 * 24)) + 1;
+
+  function actualizarDias() {
+    document.querySelectorAll(".dia").forEach((dia, index) => {
+      const numeroDia = index + 1;
+      const boton = document.querySelectorAll(".dias-selector button")[index];
+
+      if (numeroDia <= diaActual) {
+        dia.classList.remove("bloqueado");
+        boton.disabled = false;
+      } else {
+        dia.classList.add("bloqueado");
+        boton.disabled = true;
+      }
+    });
+
+    mostrarDia(Math.min(diaActual, 4));
+  }
+
   function mostrarDia(n) {
     document.querySelectorAll(".dia").forEach(d => d.classList.remove("visible"));
     document.querySelectorAll(".dias-selector button").forEach(b => b.classList.remove("activo"));
@@ -80,7 +106,10 @@
     document.getElementById("dia" + n).classList.add("visible");
     document.querySelectorAll(".dias-selector button")[n - 1].classList.add("activo");
   }
+
+  actualizarDias();
 </script>
+
 
 </body>
 </html>
