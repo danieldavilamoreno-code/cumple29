@@ -98,3 +98,14 @@ button:hover {
     margin-bottom: 25px;
   }
 </style>
+
+<style>
+  #contador {
+    font-size: 32px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin: 20px 0 30px;
+    font-family: 'Playfair Display', serif;
+  }
+</style>
+
