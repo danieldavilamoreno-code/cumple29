@@ -95,3 +95,21 @@ button:disabled {
   cursor: pointer;
   text-decoration: underline;
 }
+
+/* ===== ANIMACIÓN CONTADOR ===== */
+.contador-animado {
+  animation: pulso 0.4s ease;
+}
+
+@keyframes pulso {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
