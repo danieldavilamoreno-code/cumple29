@@ -147,6 +147,31 @@ textarea {
   min-height: 90px;
 }
 
+/* ===== CAMPOS DIA FOTOS ===== */
+.dias-selector {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.dias-selector button {
+  padding: 10px 16px;
+  border-radius: 20px;
+}
+
+.dia {
+  display: none;
+  text-align: center;
+}
+
+.galeria {
+  margin-top: 20px;
+  min-height: 120px;
+  border: 2px dashed rgba(255,255,255,0.3);
+  border-radius: 16px;
+}
+
 
 
 
