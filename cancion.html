@@ -80,24 +80,36 @@
       }
     });
 
+    <script>
   function enviarFormulario(e) {
     e.preventDefault();
 
-    const texto = document.getElementById("textoRecuerdo").value;
+    const texto = document.getElementById("textoRecuerdo").value.trim();
 
-    // Guardar en localStorage
-    localStorage.setItem("recuerdo", texto);
+    if (texto === "") {
+      alert("Escribe algo primero 🤍");
+      return;
+    }
+
+    // 1. Obtener recuerdos guardados (o lista vacía)
+    let recuerdos = JSON.parse(localStorage.getItem("recuerdos")) || [];
+
+    // 2. Agregar el nuevo recuerdo
+    recuerdos.push(texto);
+
+    // 3. Guardar la lista actualizada
+    localStorage.setItem("recuerdos", JSON.stringify(recuerdos));
+
+    // 4. Limpiar textarea
+    document.getElementById("textoRecuerdo").value = "";
 
     alert("Gracias por compartir un poco más sobre ti, lo valoro mucho 🤍");
   }
 
-  // Al cargar la página, recuperar lo guardado
+  // Mostrar cuántos recuerdos hay (solo para prueba)
   window.onload = function () {
-    const guardado = localStorage.getItem("recuerdo");
-
-    if (guardado) {
-      document.getElementById("textoRecuerdo").value = guardado;
-    }
+    let recuerdos = JSON.parse(localStorage.getItem("recuerdos")) || [];
+    console.log("Recuerdos guardados:", recuerdos);
   };
   </script>
 
