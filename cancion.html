@@ -131,32 +131,36 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const select = document.getElementById("tipo");
     const mensaje = document.getElementById("mensajeDia");
+    const tipoTexto = document.getElementById("tipoDia");
+    const tipoHidden = document.getElementById("tipoHidden");
 
     const inicio = new Date("2026-01-10");
     const hoy = new Date();
 
     const diff = Math.floor((hoy - inicio) / (1000 * 60 * 60 * 24));
-    // const dia = 1; // emoción
+    const dia = diff % 3;
 
     if (dia === 0) {
-      select.innerHTML = "<option>🎶 Una canción</option>";
-      mensaje.innerHTML = "Hoy guarda una canción que te guste 🤍";
+      tipoTexto.innerHTML = "🎶 Hoy: una canción";
+      mensaje.innerHTML = "Guarda una canción que te acompañe 🤍";
+      tipoHidden.value = "Canción";
     } else if (dia === 1) {
-      select.innerHTML = "<option>🤍 Una emoción</option>";
-      mensaje.innerHTML = "Hoy ponle nombre a lo que sientes, sin juzgarlo.";
+      tipoTexto.innerHTML = "🤍 Hoy: una emoción";
+      mensaje.innerHTML = "Ponle nombre a lo que sientes, sin juzgarlo.";
+      tipoHidden.value = "Emoción";
     } else {
-      select.innerHTML = "<option>🌙 Un recuerdo</option>";
-      mensaje.innerHTML = "Hoy conserva un recuerdo que te haga sonreír.";
+      tipoTexto.innerHTML = "🌙 Hoy: un recuerdo";
+      mensaje.innerHTML = "Conserva un recuerdo que te haga sonreír.";
+      tipoHidden.value = "Recuerdo";
     }
   });
 
-  function guardarMomento(e) {
-    e.preventDefault();
+  function enviarFormulario() {
     alert("Se guardaron correctamente los momentos que más valoras, prometo cuidarlos 🤍");
   }
 </script>
+
 
 
 
