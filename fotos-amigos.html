@@ -2,81 +2,39 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Un recuerdo para mi</title>
+  <title>Un recuerdo para ella 🤍</title>
   <link rel="stylesheet" href="style.css">
 </head>
-
- <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script>
-  const supabaseUrl = "https://vunamqmjquqqbjcuewfp.supabase.co";
-  const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ1bmFtcW1qcXVxcWJqY3Vld2ZwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgwNjAzMDksImV4cCI6MjA4MzYzNjMwOX0.Az5YzL_lMnaxjaR-o399mLeOctRincjK-SJGV9yHoOA";
-  const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
-
-  window.subirFoto = async function () {
-    const archivo = document.getElementById("foto").files[0];
-
-    if (!archivo) {
-      alert("Por favor, elige una foto 🤍");
-      return;
-    }
-
-    const nombreArchivo = `amigo-${Date.now()}-${archivo.name}`;
-
-    const texto = document.getElementById("mensaje").value;
-
-const { error } = await supabaseClient.storage
-  .from("fotos-amigos")
-  .upload(nombreArchivo, archivo, {
-    metadata: {
-      mensaje: texto
-    }
-  });
-
-    if (error) {
-      alert("Error: " + error.message);
-      console.error(error);
-    } else {
-     document.querySelector(".nota").innerText =
-  "Gracias 🤍 Tu recuerdo fue recibido y será cuidado con mucho cariño.";
-      document.getElementById("foto").value = "";
-      document.getElementById("mensaje").value = "";
-    }
-  };
-</script>
-
-  
 <body>
 
   <div class="fondo">
     <div class="contenedor">
 
-      <h1>Un recuerdo para compartir conmigo 🤍</h1>
+      <h1>Un recuerdo para ella 🤍</h1>
 
       <p class="descripcion">
-        Si estás leyendo esto es porque has sido parte de mi historia,  
-        de alguna forma, en algún momento.
+        Si estás aquí es porque has sido parte de su historia.
       </p>
 
       <p class="descripcion">
-        Este espacio existe solo para guardar un recuerdo bonito conmigo.  
-        Nada se publica, nada se comparte.  
-        Yo me encargaré de cuidarlo con el cariño que merece.
+        Este espacio es solo para guardar un recuerdo bonito con ella.
+        Nada se publica, nada se comparte.
+        Yo me encargaré de cuidarlo con cariño.
       </p>
 
       <p class="descripcion">
-        Puedes subir una foto conmigo 
-        y, si quieres, escribir unas palabras.  
+        Puedes subir una foto y, si quieres, escribir unas palabras.
         No tiene que ser perfecto. Solo sincero.
       </p>
 
+      <!-- FORMULARIO -->
       <div class="bloque-formulario">
 
         <input type="file" id="foto" accept="image/*">
-        
-        <textarea 
+
+        <textarea
           id="mensaje"
-          rows="4" 
+          rows="4"
           placeholder="Si quieres, escribe aquí unas palabras…"
         ></textarea>
 
@@ -84,13 +42,58 @@ const { error } = await supabaseClient.storage
 
       </div>
 
+      <!-- MENSAJE FINAL -->
       <p class="nota">
-        Gracias por tomarte el tiempo 🤍  
-        Estos recuerdos formarán parte de un día muy especial.
+        Tu recuerdo aún no ha sido enviado.
       </p>
 
     </div>
   </div>
+
+  <!-- SUPABASE -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    // 🔐 CONFIGURACIÓN SUPABASE
+    const supabaseUrl = "https://vunamqmjquqqbjcuewfp.supabase.co";
+    const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ1bmFtcW1qcXVxcWJqY3Vld2ZwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgwNjAzMDksImV4cCI6MjA4MzYzNjMwOX0.Az5YzL_lMnaxjaR-o399mLeOctRincjK-SJGV9yHoOA";
+    const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+    // 📤 FUNCIÓN DE SUBIDA
+    window.subirFoto = async function () {
+      const archivo = document.getElementById("foto").files[0];
+      const texto = document.getElementById("mensaje").value;
+      const nota = document.querySelector(".nota");
+
+      if (!archivo) {
+        alert("Por favor, elige una foto 🤍");
+        return;
+      }
+
+      const nombreArchivo = `amigo-${Date.now()}-${archivo.name}`;
+
+      const { error } = await supabaseClient.storage
+        .from("fotos-amigos")
+        .upload(nombreArchivo, archivo, {
+          metadata: {
+            mensaje: texto
+          }
+        });
+
+      if (error) {
+        console.error(error);
+        alert("Ocurrió un error al guardar el recuerdo 😢");
+      } else {
+        // LIMPIAR FORMULARIO
+        document.getElementById("foto").value = "";
+        document.getElementById("mensaje").value = "";
+
+        // MENSAJE FINAL
+        nota.innerText =
+          "Gracias 🤍 Tu recuerdo fue recibido y será cuidado con mucho cariño.";
+      }
+    };
+  </script>
 
 </body>
 </html>
