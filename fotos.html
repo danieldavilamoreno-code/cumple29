@@ -1,21 +1,60 @@
-<h1>Nuestros recuerdos</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Fotos</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
-<section class="dia">
-  <h2>Día 1 · Amigos</h2>
-  <div class="galeria"></div>
-</section>
+  <main class="contenedor">
+    <h1>Nuestros recuerdos 📸</h1>
 
-<section class="dia">
-  <h2>Día 2 · Familia</h2>
-  <div class="galeria"></div>
-</section>
+    <!-- Selector de días -->
+    <div class="dias-selector">
+      <button onclick="mostrarDia(1)">Día 1</button>
+      <button onclick="mostrarDia(2)">Día 2</button>
+      <button onclick="mostrarDia(3)">Día 3</button>
+      <button onclick="mostrarDia(4)">Día 4</button>
+    </div>
 
-<section class="dia">
-  <h2>Día 3 · Tú y yo</h2>
-  <div class="galeria"></div>
-</section>
+    <!-- Contenido por día -->
+    <section id="dia1" class="dia">
+      <h2>Día 1 · Amigos</h2>
+      <p>Momentos con quienes han sido parte del camino.</p>
+      <div class="galeria"></div>
+    </section>
 
-<section class="dia">
-  <h2>Día 4 · Tú</h2>
-  <div class="galeria"></div>
-</section>
+    <section id="dia2" class="dia">
+      <h2>Día 2 · Familia</h2>
+      <p>Raíces, abrazos y hogar.</p>
+      <div class="galeria"></div>
+    </section>
+
+    <section id="dia3" class="dia">
+      <h2>Día 3 · Tú y yo</h2>
+      <p>Nuestra historia juntos.</p>
+      <div class="galeria"></div>
+    </section>
+
+    <section id="dia4" class="dia">
+      <h2>Día 4 · Tú</h2>
+      <p>Todo lo que eres.</p>
+      <div class="galeria"></div>
+    </section>
+  </main>
+
+  <script>
+    function mostrarDia(numero) {
+      const dias = document.querySelectorAll(".dia");
+      dias.forEach(dia => dia.style.display = "none");
+
+      document.getElementById("dia" + numero).style.display = "block";
+    }
+
+    // Mostrar día 1 por defecto
+    mostrarDia(1);
+  </script>
+
+</body>
+</html>
