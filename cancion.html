@@ -81,9 +81,13 @@
     });
 
     function enviarFormulario(e) {
-      e.preventDefault();
-      alert("Gracias por compartir un poco más sobre ti 🤍");
-    }
+    e.preventDefault();
+
+    const texto = document.getElementById("textoRecuerdo").value;
+
+    console.log("Texto escrito:", texto);
+    alert("Gracias por compartir un poco más sobre ti 🤍");
+  }
   </script>
 
 </body>
