@@ -7,54 +7,80 @@
 </head>
 <body>
 
-  <main class="contenedor">
-    <h1>Nuestros recuerdos 📸</h1>
+<main class="contenedor">
+  <h1>Nuestros recuerdos 📸</h1>
+  <p class="subtitulo">
+    Este espacio es solo tuyo.  
+    Nada se comparte, nada se pierde.  
+    Todo se guarda con cuidado.
+  </p>
 
-    <!-- Selector de días -->
-    <div class="dias-selector">
-      <button onclick="mostrarDia(1)">Día 1</button>
-      <button onclick="mostrarDia(2)">Día 2</button>
-      <button onclick="mostrarDia(3)">Día 3</button>
-      <button onclick="mostrarDia(4)">Día 4</button>
+  <!-- Selector de días -->
+  <div class="dias-selector">
+    <button class="activo" onclick="mostrarDia(1)">Día 1</button>
+    <button onclick="mostrarDia(2)">Día 2</button>
+    <button onclick="mostrarDia(3)">Día 3</button>
+    <button onclick="mostrarDia(4)">Día 4</button>
+  </div>
+
+  <!-- Día 1 -->
+  <section id="dia1" class="dia visible">
+    <h2>Día 1 · Amigos</h2>
+    <p class="mensaje">
+      Personas que han estado contigo en distintas etapas.  
+      Aquí puedes guardar risas, momentos y recuerdos compartidos.
+    </p>
+    <div class="galeria vacia">
+      <span>Aquí vivirán esos recuerdos 🤍</span>
     </div>
+  </section>
 
-    <!-- Contenido por día -->
-    <section id="dia1" class="dia">
-      <h2>Día 1 · Amigos</h2>
-      <p>Momentos con quienes han sido parte del camino.</p>
-      <div class="galeria"></div>
-    </section>
+  <!-- Día 2 -->
+  <section id="dia2" class="dia bloqueado">
+    <h2>Día 2 · Familia</h2>
+    <p class="mensaje">
+      Tus raíces, tu historia, tu hogar.  
+      Este espacio se abrirá cuando llegue su momento.
+    </p>
+    <div class="galeria cerrada">
+      <span>Disponible pronto</span>
+    </div>
+  </section>
 
-    <section id="dia2" class="dia">
-      <h2>Día 2 · Familia</h2>
-      <p>Raíces, abrazos y hogar.</p>
-      <div class="galeria"></div>
-    </section>
+  <!-- Día 3 -->
+  <section id="dia3" class="dia bloqueado">
+    <h2>Día 3 · Tú y yo</h2>
+    <p class="mensaje">
+      Lo que hemos construido juntos.  
+      Con calma, sin prisa.
+    </p>
+    <div class="galeria cerrada">
+      <span>Aún no</span>
+    </div>
+  </section>
 
-    <section id="dia3" class="dia">
-      <h2>Día 3 · Tú y yo</h2>
-      <p>Nuestra historia juntos.</p>
-      <div class="galeria"></div>
-    </section>
+  <!-- Día 4 -->
+  <section id="dia4" class="dia bloqueado">
+    <h2>Día 4 · Tú</h2>
+    <p class="mensaje">
+      Fotos solo tuyas.  
+      Para que te veas como yo te veo.
+    </p>
+    <div class="galeria cerrada">
+      <span>Último día</span>
+    </div>
+  </section>
+</main>
 
-    <section id="dia4" class="dia">
-      <h2>Día 4 · Tú</h2>
-      <p>Todo lo que eres.</p>
-      <div class="galeria"></div>
-    </section>
-  </main>
+<script>
+  function mostrarDia(n) {
+    document.querySelectorAll(".dia").forEach(d => d.classList.remove("visible"));
+    document.querySelectorAll(".dias-selector button").forEach(b => b.classList.remove("activo"));
 
-  <script>
-    function mostrarDia(numero) {
-      const dias = document.querySelectorAll(".dia");
-      dias.forEach(dia => dia.style.display = "none");
-
-      document.getElementById("dia" + numero).style.display = "block";
-    }
-
-    // Mostrar día 1 por defecto
-    mostrarDia(1);
-  </script>
+    document.getElementById("dia" + n).classList.add("visible");
+    document.querySelectorAll(".dias-selector button")[n - 1].classList.add("activo");
+  }
+</script>
 
 </body>
 </html>
