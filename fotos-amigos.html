@@ -31,7 +31,8 @@
       alert("Error: " + error.message);
       console.error(error);
     } else {
-      alert("Gracias 🤍 Tu recuerdo fue guardado con cariño.");
+     document.querySelector(".nota").innerText =
+  "Gracias 🤍 Tu recuerdo fue recibido y será cuidado con mucho cariño.";
       document.getElementById("foto").value = "";
     }
   };
