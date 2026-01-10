@@ -80,9 +80,23 @@
       }
     });
 
- function enviarFormulario(e) {
+  function enviarFormulario(e) {
     e.preventDefault();
-    alert("la función se ejecuta");
+
+    const texto = document.getElementById("textoRecuerdo").value;
+
+    console.log("Texto capturado:", texto);
+
+    let recuerdos = JSON.parse(localStorage.getItem("recuerdos")) || [];
+    console.log("Antes de guardar:", recuerdos);
+
+    recuerdos.push(texto);
+
+    localStorage.setItem("recuerdos", JSON.stringify(recuerdos));
+
+    console.log("Después de guardar:", localStorage.getItem("recuerdos"));
+
+    alert("Intenté guardar 🤍");
   }
   </script>
 
