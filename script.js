@@ -1,4 +1,4 @@
-const fechaCumple = new Date("2025-01-26T00:00:00");
+const fechaCumple = new Date("2026-01-26T00:00:00");
 
 function actualizarContador() {
   const ahora = new Date();
@@ -19,3 +19,4 @@ function actualizarContador() {
 
 setInterval(actualizarContador, 1000);
 actualizarContador();
+
