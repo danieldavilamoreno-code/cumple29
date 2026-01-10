@@ -231,5 +231,16 @@ textarea {
   opacity: 0.6;
 }
 
+/* ===== BLOQUEO DIAS ===== */
+.bloqueado {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.dias-selector button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 
 
