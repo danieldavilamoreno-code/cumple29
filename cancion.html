@@ -81,6 +81,7 @@
       }
     });
 
+  <script>
   function mostrarRecuerdos() {
     const contenedor = document.getElementById("listaRecuerdos");
     contenedor.innerHTML = "";
@@ -88,17 +89,46 @@
     let recuerdos = JSON.parse(localStorage.getItem("recuerdos")) || [];
 
     recuerdos.forEach((texto, index) => {
+      const item = document.createElement("div");
+      item.style.display = "flex";
+      item.style.alignItems = "center";
+      item.style.justifyContent = "space-between";
+      item.style.marginBottom = "8px";
+
       const p = document.createElement("p");
       p.textContent = "🤍 " + texto;
-      contenedor.appendChild(p);
+      p.style.margin = "0";
+
+      const btn = document.createElement("button");
+      btn.textContent = "🗑️";
+      btn.style.width = "auto";
+      btn.style.padding = "6px 10px";
+      btn.style.fontSize = "12px";
+
+      btn.onclick = function () {
+        borrarRecuerdo(index);
+      };
+
+      item.appendChild(p);
+      item.appendChild(btn);
+      contenedor.appendChild(item);
     });
+  }
+
+  function borrarRecuerdo(index) {
+    let recuerdos = JSON.parse(localStorage.getItem("recuerdos")) || [];
+
+    recuerdos.splice(index, 1); // elimina uno
+
+    localStorage.setItem("recuerdos", JSON.stringify(recuerdos));
+
+    mostrarRecuerdos();
   }
 
   function enviarFormulario(e) {
     e.preventDefault();
 
     const texto = document.getElementById("textoRecuerdo").value.trim();
-
     if (texto === "") return;
 
     let recuerdos = JSON.parse(localStorage.getItem("recuerdos")) || [];
@@ -106,12 +136,10 @@
     localStorage.setItem("recuerdos", JSON.stringify(recuerdos));
 
     document.getElementById("textoRecuerdo").value = "";
-
     mostrarRecuerdos();
   }
 
-  window.onload = mostrarRecuerdos;</script>
-
+  window.onload = mostrarRecuerdos;
   </script>
 
 </body>
