@@ -33,6 +33,12 @@
 
         <input type="file" id="foto" accept="image/*">
 
+        <input
+          type="text"
+          id="autor"
+          placeholder="Tu nombre (opcional)"
+        >
+
         <textarea
           id="mensaje"
           rows="4"
@@ -68,6 +74,7 @@
     window.subirFoto = async function () {
       const archivo = document.getElementById("foto").files[0];
       const texto = document.getElementById("mensaje").value;
+      const autor = document.getElementById("autor").value;
       const nota = document.querySelector(".nota");
 
       if (!archivo) {
@@ -95,6 +102,7 @@
           {
             foto_nombre: nombreArchivo,
             mensaje: texto,
+            autor: autor,
             categoria: "amigos"
           }
         ]);
@@ -108,10 +116,12 @@
       // 3️⃣ ÉXITO TOTAL 🤍
       document.getElementById("foto").value = "";
       document.getElementById("mensaje").value = "";
+      document.getElementById("autor").value = "";
 
       nota.innerText =
         "Gracias 🤍 fue recibido con éxito, será un día especial.";
-      alert("Gracias 🤍 fue recibido con éxito, será un día especial.");
+
+      alert("Gracias 🤍 fue recibido con éxito, será un día especial");
     };
   </script>
 
