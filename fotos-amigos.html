@@ -82,7 +82,7 @@
 
       if (!error) {
   const { error: errorInsert } = await supabaseClient
-    .from("recuerdos")
+    .from("recuerdos-amigos")
     .insert([
       {
         foto_nombre: nombreArchivo,
