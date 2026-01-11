@@ -80,6 +80,24 @@
           }
         });
 
+      if (!error) {
+  const { error: errorInsert } = await supabaseClient
+    .from("recuerdos")
+    .insert([
+      {
+        foto_nombre: nombreArchivo,
+        mensaje: texto,
+        categoria: "amigos"
+      }
+    ]);
+
+  if (errorInsert) {
+    console.error("Error guardando en tabla:", errorInsert);
+    alert("La foto se guardó, pero el mensaje no 😢");
+    return;
+  }
+}
+
       if (error) {
         console.error(error);
         alert("Ocurrió un error al guardar el recuerdo 😢");
