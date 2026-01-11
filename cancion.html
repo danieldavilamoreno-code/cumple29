@@ -20,6 +20,11 @@
       animation: aparecer 1.5s ease;
     }
 
+    #tipoDia {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
     @keyframes aparecer {
       from {
         opacity: 0;
@@ -33,9 +38,6 @@
   </style>
 </head>
 
- <script type="module" src="firebase.js"></script>
-<script type="module" src="recuerdos-firebase.js"></script>
-
 <body>
 
   <div class="contenedor">
@@ -45,22 +47,40 @@
     <p id="mensajeDia"></p>
 
     <form onsubmit="enviarFormulario(event)">
-      <div id="listaRecuerdos"></div>
       <input type="hidden" id="tipoHidden">
 
-      <textarea id="textoRecuerdo" placeholder="Escribe aquí lo que quieras guardar…"></textarea>
+      <textarea
+        id="textoRecuerdo"
+        placeholder="Escribe aquí lo que quieras guardar…"
+        required
+      ></textarea>
 
       <button type="submit">Guardar</button>
 
-      <button class="volver" onclick="window.location.href='index.html'">
+      <button
+        type="button"
+        class="volver"
+        onclick="window.location.href='index.html'"
+      >
         Volver a la página principal
       </button>
     </form>
   </div>
 
+  <!-- Supabase -->
   <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-  
+
   <script>
+    /* 🔴 1. CONFIGURA TUS CLAVES DE SUPABASE */
+    const supabaseUrl = "https://vunamqmjquqqbjcuewfp.supabase.co";
+    const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ1bmFtcW1qcXVxcWJqY3Vld2ZwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgwNjAzMDksImV4cCI6MjA4MzYzNjMwOX0.Az5YzL_lMnaxjaR-o399mLeOctRincjK-SJGV9yHoOA";
+
+    const supabase = window.supabase.createClient(
+      supabaseUrl,
+      supabaseKey
+    );
+
+    /* 🔮 LÓGICA DEL DÍA */
     document.addEventListener("DOMContentLoaded", function () {
       const mensaje = document.getElementById("mensajeDia");
       const tipoTexto = document.getElementById("tipoDia");
@@ -86,66 +106,34 @@
       }
     });
 
-  function mostrarRecuerdos() {
-    const contenedor = document.getElementById("listaRecuerdos");
-    contenedor.innerHTML = "";
+    /* 💾 GUARDAR EN SUPABASE */
+    async function enviarFormulario(e) {
+      e.preventDefault();
 
-    let recuerdos = JSON.parse(localStorage.getItem("recuerdos")) || [];
+      const texto = document.getElementById("textoRecuerdo").value.trim();
+      const tipo = document.getElementById("tipoHidden").value;
 
-    recuerdos.forEach((texto, index) => {
-      const item = document.createElement("div");
-      item.style.display = "flex";
-      item.style.alignItems = "center";
-      item.style.justifyContent = "space-between";
-      item.style.marginBottom = "8px";
+      if (!texto) return;
 
-      const p = document.createElement("p");
-      p.textContent = "🤍 " + texto;
-      p.style.margin = "0";
+      const { error } = await supabase
+        .from("momentos")
+        .insert([
+          {
+            tipo: tipo,
+            contenido: texto,
+            fecha: new Date().toISOString().split("T")[0],
+            origen: "ella"
+          }
+        ]);
 
-      const btn = document.createElement("button");
-      btn.textContent = "🗑️";
-      btn.style.width = "auto";
-      btn.style.padding = "6px 10px";
-      btn.style.fontSize = "12px";
-
-      btn.onclick = function () {
-        borrarRecuerdo(index);
-      };
-
-      item.appendChild(p);
-      item.appendChild(btn);
-      contenedor.appendChild(item);
-    });
-  }
-
-  function borrarRecuerdo(index) {
-    const confirmar = confirm("¿Seguro que quieres borrar este recuerdo? 🤍");
-
-    if (!confirmar) return;
-
-    let recuerdos = JSON.parse(localStorage.getItem("recuerdos")) || [];
-    recuerdos.splice(index, 1);
-    localStorage.setItem("recuerdos", JSON.stringify(recuerdos));
-
-    mostrarRecuerdos();
-  }
-
-  function enviarFormulario(e) {
-    e.preventDefault();
-
-    const texto = document.getElementById("textoRecuerdo").value.trim();
-    if (texto === "") return;
-
-    let recuerdos = JSON.parse(localStorage.getItem("recuerdos")) || [];
-    recuerdos.push(texto);
-    localStorage.setItem("recuerdos", JSON.stringify(recuerdos));
-
-    document.getElementById("textoRecuerdo").value = "";
-    mostrarRecuerdos();
-  }
-
-  window.onload = mostrarRecuerdos;
+      if (!error) {
+        alert("Guarda aquí los momentos que más valoras… prometo cuidarlos 🤍");
+        document.getElementById("textoRecuerdo").value = "";
+      } else {
+        alert("Algo falló, pero no se perdió nada 🤍");
+        console.error(error);
+      }
+    }
   </script>
 
 </body>
