@@ -82,68 +82,49 @@
     );
 
     /* 🔮 LÓGICA DEL DÍA */
-    document.addEventListener("DOMContentLoaded", function () {
-      const mensaje = document.getElementById("mensajeDia");
-      const tipoTexto = document.getElementById("tipoDia");
-      const tipoHidden = document.getElementById("tipoHidden");
+ document.addEventListener("DOMContentLoaded", () => {
 
-      const inicio = new Date("2026-01-09");
-      const hoy = new Date();
-      const diff = Math.floor((hoy - inicio) / (1000 * 60 * 60 * 24));
-      const dia = diff % 3;
+  const tipoTexto = document.getElementById("tipoDia");
+  const mensaje = document.getElementById("mensajeDia");
+  const guia = document.getElementById("guiaDia");
+  const textarea = document.getElementById("textoRecuerdo");
+  const tipoHidden = document.getElementById("tipoHidden");
 
-     const guia = document.getElementById("guiaDia");
-const textarea = document.getElementById("textoRecuerdo");
-
-if (dia === 0) {
-  tipoTexto.textContent = "🎶 Hoy: una canción";
-  mensaje.textContent = "Hoy quiero que guardes una canción 🤍";
-
-  if (guia) {
-    guia.textContent =
-      "Escribe el nombre de una canción y por qué te acompaña.";
-  }
-
-  if (textarea) {
-    textarea.placeholder =
-      "Ejemplo: Esta canción me calma cuando el día fue pesado…";
-  }
-
-  tipoHidden.value = "Canción";
-
-} else if (dia === 1) {
-  tipoTexto.textContent = "🤍 Hoy: una emoción";
-  mensaje.textContent = "Hoy quiero que escribas cómo te sientes 🤍";
-
-  if (guia) {
-    guia.textContent =
-      "Ponle nombre a una emoción que esté contigo hoy.";
-  }
-
-  if (textarea) {
-    textarea.placeholder =
-      "Ejemplo: Hoy me siento agradecida porque…";
-  }
-
-  tipoHidden.value = "Emoción";
-
-} else {
-  tipoTexto.textContent = "🌙 Hoy: un recuerdo";
-  mensaje.textContent = "Hoy quiero que guardes un recuerdo bonito 🤍";
-
-  if (guia) {
-    guia.textContent =
-      "Guarda un recuerdo que quieras conservar.";
-  }
-
-  if (textarea) {
-    textarea.placeholder =
-      "Ejemplo: Recuerdo cuando sonreí sin darme cuenta…";
-  }
-
-  tipoHidden.value = "Recuerdo";
-}
+  // 🔴 VERIFICACIÓN CRÍTICA
+  if (!tipoTexto || !mensaje || !guia || !textarea || !tipoHidden) {
+    console.error("Falta un elemento del DOM", {
+      tipoTexto, mensaje, guia, textarea, tipoHidden
     });
+    return;
+  }
+
+  const inicio = new Date("2026-01-09");
+  const hoy = new Date();
+  const diff = Math.floor((hoy - inicio) / (1000 * 60 * 60 * 24));
+  const dia = ((diff % 3) + 3) % 3; // evita negativos
+
+  if (dia === 0) {
+    tipoTexto.textContent = "🎶 Hoy: una canción";
+    mensaje.textContent = "Hoy quiero que guardes una canción 🤍";
+    guia.textContent = "Escribe el nombre de una canción y por qué te acompaña.";
+    textarea.placeholder = "Ejemplo: Esta canción me calma cuando el día fue pesado…";
+    tipoHidden.value = "Canción";
+
+  } else if (dia === 1) {
+    tipoTexto.textContent = "🤍 Hoy: una emoción";
+    mensaje.textContent = "Hoy quiero que escribas cómo te sientes 🤍";
+    guia.textContent = "Ponle nombre a una emoción que esté contigo hoy.";
+    textarea.placeholder = "Ejemplo: Hoy me siento agradecida porque…";
+    tipoHidden.value = "Emoción";
+
+  } else {
+    tipoTexto.textContent = "🌙 Hoy: un recuerdo";
+    mensaje.textContent = "Hoy quiero que guardes un recuerdo bonito 🤍";
+    guia.textContent = "Guarda un recuerdo que quieras conservar.";
+    textarea.placeholder = "Ejemplo: Recuerdo cuando sonreí sin darme cuenta…";
+    tipoHidden.value = "Recuerdo";
+  }
+});
 
     /* 💾 GUARDAR EN SUPABASE */
     async function enviarFormulario(e) {
