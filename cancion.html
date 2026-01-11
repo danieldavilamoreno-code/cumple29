@@ -96,24 +96,51 @@
 const textarea = document.getElementById("textoRecuerdo");
 
 if (dia === 0) {
-  tipoTexto.innerHTML = "🎶 Hoy: una canción";
-  mensaje.innerHTML = "Hoy quiero que guardes una canción 🤍";
-  guia.innerHTML = "Escribe el nombre de una canción y por qué te acompaña.";
-  textarea.placeholder = "Ejemplo: ‘Esta canción me hace sentir en calma cuando el día fue pesado…’";
+  tipoTexto.textContent = "🎶 Hoy: una canción";
+  mensaje.textContent = "Hoy quiero que guardes una canción 🤍";
+
+  if (guia) {
+    guia.textContent =
+      "Escribe el nombre de una canción y por qué te acompaña.";
+  }
+
+  if (textarea) {
+    textarea.placeholder =
+      "Ejemplo: Esta canción me calma cuando el día fue pesado…";
+  }
+
   tipoHidden.value = "Canción";
 
 } else if (dia === 1) {
-  tipoTexto.innerHTML = "🤍 Hoy: una emoción";
-  mensaje.innerHTML = "Hoy quiero que escribas cómo te sientes 🤍";
-  guia.innerHTML = "Ponle nombre a una emoción que esté contigo hoy.";
-  textarea.placeholder = "Ejemplo: ‘Hoy me siento agradecida porque…’";
+  tipoTexto.textContent = "🤍 Hoy: una emoción";
+  mensaje.textContent = "Hoy quiero que escribas cómo te sientes 🤍";
+
+  if (guia) {
+    guia.textContent =
+      "Ponle nombre a una emoción que esté contigo hoy.";
+  }
+
+  if (textarea) {
+    textarea.placeholder =
+      "Ejemplo: Hoy me siento agradecida porque…";
+  }
+
   tipoHidden.value = "Emoción";
 
 } else {
-  tipoTexto.innerHTML = "🌙 Hoy: un recuerdo";
-  mensaje.innerHTML = "Hoy quiero que guardes un recuerdo bonito 🤍";
-  guia.innerHTML = "Guarda un recuerdo que quieras conservar.";
-  textarea.placeholder = "Ejemplo: ‘Recuerdo cuando… y me hizo sonreír’";
+  tipoTexto.textContent = "🌙 Hoy: un recuerdo";
+  mensaje.textContent = "Hoy quiero que guardes un recuerdo bonito 🤍";
+
+  if (guia) {
+    guia.textContent =
+      "Guarda un recuerdo que quieras conservar.";
+  }
+
+  if (textarea) {
+    textarea.placeholder =
+      "Ejemplo: Recuerdo cuando sonreí sin darme cuenta…";
+  }
+
   tipoHidden.value = "Recuerdo";
 }
     });
