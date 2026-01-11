@@ -263,5 +263,7 @@ textarea {
   margin-bottom: 12px;
   color: #4a2c40;
   font-weight: 500;
+  animation: aparecer 1.8s ease;
 }
+
 
