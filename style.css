@@ -266,4 +266,12 @@ textarea {
   animation: aparecer 1.8s ease;
 }
 
+#tipoDia,
+#mensajeDia,
+#guiaDia {
+  opacity: 1;
+  animation: aparecer 1.5s ease;
+}
+
+
 
