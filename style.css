@@ -257,3 +257,11 @@ textarea {
   opacity: 0.8;
   text-align: center;
 }
+
+#guiaDia {
+  font-size: 15px;
+  margin-bottom: 12px;
+  color: #4a2c40;
+  font-weight: 500;
+}
+
