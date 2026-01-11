@@ -92,19 +92,30 @@
       const diff = Math.floor((hoy - inicio) / (1000 * 60 * 60 * 24));
       const dia = diff % 3;
 
-      if (dia === 0) {
-        tipoTexto.innerHTML = "🎶 Hoy: una canción";
-        mensaje.innerHTML = "Guarda una canción que te acompañe 🤍";
-        tipoHidden.value = "Canción";
-      } else if (dia === 1) {
-        tipoTexto.innerHTML = "🤍 Hoy: una emoción";
-        mensaje.innerHTML = "Ponle nombre a lo que sientes, sin juzgarlo.";
-        tipoHidden.value = "Emoción";
-      } else {
-        tipoTexto.innerHTML = "🌙 Hoy: un recuerdo";
-        mensaje.innerHTML = "Conserva un recuerdo que te haga sonreír.";
-        tipoHidden.value = "Recuerdo";
-      }
+     const guia = document.getElementById("guiaDia");
+const textarea = document.getElementById("textoRecuerdo");
+
+if (dia === 0) {
+  tipoTexto.innerHTML = "🎶 Hoy: una canción";
+  mensaje.innerHTML = "Hoy este espacio es para una canción.";
+  guia.innerHTML = "Escribe el nombre de una canción y por qué te acompaña.";
+  textarea.placeholder = "Ejemplo: ‘Esta canción me hace sentir en calma cuando el día fue pesado…’";
+  tipoHidden.value = "Canción";
+
+} else if (dia === 1) {
+  tipoTexto.innerHTML = "🤍 Hoy: una emoción";
+  mensaje.innerHTML = "Hoy este espacio es para lo que sientes.";
+  guia.innerHTML = "Ponle nombre a una emoción que esté contigo hoy.";
+  textarea.placeholder = "Ejemplo: ‘Hoy me siento agradecida porque…’";
+  tipoHidden.value = "Emoción";
+
+} else {
+  tipoTexto.innerHTML = "🌙 Hoy: un recuerdo";
+  mensaje.innerHTML = "Hoy este espacio es para un recuerdo.";
+  guia.innerHTML = "Guarda un recuerdo que quieras conservar.";
+  textarea.placeholder = "Ejemplo: ‘Recuerdo cuando… y me hizo sonreír’";
+  tipoHidden.value = "Recuerdo";
+}
     });
 
     /* 💾 GUARDAR EN SUPABASE */
