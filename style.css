@@ -3,33 +3,43 @@
   box-sizing: border-box;
 }
 
-/* ===== BODY GENERAL ===== */
+/* ===== BODY (SOLO FONDO) ===== */
 body {
   margin: 0;
   min-height: 100vh;
   font-family: 'Montserrat', sans-serif;
   background: linear-gradient(180deg, #f7e9f2, #fde2ea);
+  color: #5a2a3a;
+}
+
+/* ===== LAYOUTS ===== */
+
+/* Para index (contador, tarjetas únicas) */
+.page-center {
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: #5a2a3a;
 }
 
-/* ===== BODY FOTOS ===== */
-body.fotos-page {
+/* Para páginas largas (fotos, regalos) */
+.page-scroll {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
   align-items: flex-start;
-  padding-top: 40px;
+  padding: 40px 0;
 }
 
 /* ===== CONTENEDOR ===== */
 .contenedor {
   background: rgba(255, 255, 255, 0.75);
-  padding: 35px 28px;
-  border-radius: 25px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  max-width: 380px;
-  width: 90%;
+  padding: 32px 26px;
+  border-radius: 26px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+  max-width: 420px;
+  width: 92%;
 }
 
 /* ===== TEXTOS ===== */
@@ -39,10 +49,15 @@ h1 {
   margin-bottom: 10px;
 }
 
+h2 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
 p {
   font-size: 14px;
   color: #7a4a5a;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 /* ===== BOTONES ===== */
@@ -56,7 +71,7 @@ button {
   color: white;
   font-size: 15px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: transform 0.25s ease;
 }
 
 button:hover {
@@ -68,13 +83,12 @@ button:disabled {
   cursor: not-allowed;
 }
 
-/* ===== VOLVER ===== */
-.volver {
-  background: none;
-  color: #a84664;
-  font-size: 13px;
-  margin-top: 18px;
-  text-decoration: underline;
+.btn-subir {
+  width: auto;
+  padding: 10px 18px;
+  font-size: 14px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #7b2ff7, #d63384);
 }
 
 /* ===== INPUTS ===== */
@@ -89,43 +103,12 @@ textarea {
   outline: none;
 }
 
-/* ===== FOTOS ===== */
-.subtitulo {
-  font-size: 14px;
-  opacity: 0.85;
-  margin-bottom: 20px;
-}
-
-.dias-selector {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 25px;
-}
-
-.dias-selector button {
-  width: auto;
-  padding: 8px 14px;
-  border-radius: 20px;
-  background: transparent;
-  border: 1px solid rgba(90,42,58,0.3);
-  color: #5a2a3a;
-}
-
-.dias-selector button.activo {
-  background: rgba(168,70,100,0.15);
-}
-
+/* ===== BLOQUES ===== */
 .bloque {
   background: rgba(255,255,255,0.6);
   padding: 16px;
   border-radius: 18px;
-  margin-bottom: 20px;
-}
-
-.bloque h2 {
-  font-size: 18px;
-  margin-bottom: 10px;
+  margin-bottom: 18px;
 }
 
 /* ===== GALERÍA ===== */
@@ -134,8 +117,7 @@ textarea {
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
-  margin-top: 15px;
-  min-height: 80px;
+  margin-top: 12px;
 }
 
 .galeria img {
@@ -148,20 +130,14 @@ textarea {
 }
 
 .galeria img:hover {
-  transform: scale(1.07);
+  transform: scale(1.08);
 }
 
-/* ===== BOTÓN SUBIR ===== */
-.btn-subir {
-  background: linear-gradient(135deg, #7b2ff7, #d63384);
-  width: auto;
-  padding: 10px 18px;
-  border-radius: 20px;
-  font-size: 14px;
-}
-
-/* ===== BLOQUEADO ===== */
-.bloqueado {
-  opacity: 0.5;
-  pointer-events: none;
+/* ===== VOLVER ===== */
+.volver {
+  display: block;
+  margin-top: 20px;
+  font-size: 13px;
+  color: #a84664;
+  text-decoration: underline;
 }
