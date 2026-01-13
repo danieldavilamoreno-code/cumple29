@@ -360,6 +360,32 @@ body.fotos-page {
   padding-top: 40px;
 }
 
+/* ===== GALERÍA FINAL (FOTOS) ===== */
+
+.fotos-page .galeria {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+  min-height: auto;
+  border: none;
+  background: transparent;
+}
+
+.fotos-page .galeria img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+  transition: transform 0.25s ease;
+}
+
+.fotos-page .galeria img:hover {
+  transform: scale(1.08);
+}
+
 
 
 
