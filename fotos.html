@@ -78,44 +78,30 @@
       supabaseKey
     );
 
-    async function subirFoto(event, categoria) {
-      const file = event.target.files[0];
-      if (!file) return;
+    function enviarFoto(categoria) {
+  const input = document.getElementById(`file-${categoria}`);
+  input.click();
 
-      const nombre = `${Date.now()}-${file.name}`;
+  input.onchange = async () => {
+    const file = input.files[0];
+    if (!file) return;
 
-      const { error } = await supabase.storage
-        .from("fotos")
-        .upload(`${categoria}/${nombre}`, file);
+    const nombre = `${Date.now()}-${file.name}`;
 
-      if (!error) {
-        cargarFotos(categoria);
-      } else {
-        alert("No se pudo subir la foto 🤍");
-        console.error(error);
-      }
+    const { error } = await supabase.storage
+      .from("fotos")
+      .upload(`${categoria}/${nombre}`, file);
+
+    if (!error) {
+      alert("Recuerdo subido, los cuidaré con el corazón 🤍");
+      cargarFotos(categoria);
+      input.value = "";
+    } else {
+      alert("No se pudo subir la foto 🤍");
+      console.error(error);
     }
-
-    async function cargarFotos(categoria) {
-      const { data } = await supabase.storage
-        .from("fotos")
-        .list(categoria);
-
-      const contenedor = document.getElementById(`galeria-${categoria}`);
-      contenedor.innerHTML = "";
-
-      data.forEach(foto => {
-        const url = supabase.storage
-          .from("fotos")
-          .getPublicUrl(`${categoria}/${foto.name}`).data.publicUrl;
-
-        const img = document.createElement("img");
-        img.src = url;
-        contenedor.appendChild(img);
-      });
-    }
-
-    ["amigos", "familia", "liz", "nosotros"].forEach(cargarFotos);
+  };
+}
   </script>
 
 </body>
