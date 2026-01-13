@@ -78,6 +78,27 @@
       supabaseKey
     );
 
+        async function cargarFotos(categoria) {
+      const { data } = await supabase.storage
+        .from("fotos")
+        .list(categoria);
+
+      const contenedor = document.getElementById(`galeria-${categoria}`);
+      contenedor.innerHTML = "";
+
+      data.forEach(foto => {
+        const url = supabase.storage
+          .from("fotos")
+          .getPublicUrl(`${categoria}/${foto.name}`).data.publicUrl;
+
+        const img = document.createElement("img");
+        img.src = url;
+        contenedor.appendChild(img);
+      });
+    }
+
+    ["amigos", "familia", "liz", "nosotros"].forEach(cargarFotos);
+    
     function enviarFoto(categoria) {
   const input = document.getElementById(`file-${categoria}`);
   input.click();
