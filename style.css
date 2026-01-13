@@ -299,6 +299,59 @@ textarea {
   margin-bottom: 30px;
 }
 
+/* =========================
+   📸 FOTOS – AJUSTES VISUALES
+   ========================= */
+
+.bloque {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 16px;
+  border-radius: 18px;
+  margin-bottom: 20px; /* antes era muy grande */
+}
+
+.bloque h2 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #f0e6ff;
+}
+
+/* Input archivo más discreto */
+.bloque input[type="file"] {
+  margin: 6px 0 10px 0;
+  font-size: 13px;
+}
+
+/* Galería más compacta y emocional */
+.galeria {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.galeria img {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.galeria img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+}
+
+/* Texto descriptivo más integrado */
+.descripcion {
+  font-size: 14px;
+  opacity: 0.85;
+  margin-bottom: 20px;
+}
+
+
 
 
 
