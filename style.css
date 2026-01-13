@@ -273,5 +273,32 @@ textarea {
   animation: aparecer 1.5s ease;
 }
 
+/* ===== FOTOS AMIGOS ===== */
+
+.btn-subir {
+  display: inline-block;
+  background: linear-gradient(135deg, #7b2ff7, #d63384);
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 10px 0;
+}
+
+.galeria img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin: 6px;
+}
+
+.bloque {
+  margin-bottom: 30px;
+}
+
+
 
 
