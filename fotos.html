@@ -22,52 +22,32 @@
     <!-- AMIGOS -->
     <div class="bloque">
       <h2>Amigos</h2>
-
       <input type="file" id="file-amigos" accept="image/*">
-
-      <button class="btn-subir" onclick="enviarFoto('amigos')">
-        Enviar foto
-      </button>
-
+      <button class="btn-subir" onclick="enviarFoto('amigos')">Enviar foto</button>
       <div class="galeria" id="galeria-amigos"></div>
     </div>
 
     <!-- FAMILIA -->
     <div class="bloque">
       <h2>Familia</h2>
-
       <input type="file" id="file-familia" accept="image/*">
-
-      <button class="btn-subir" onclick="enviarFoto('familia')">
-        Enviar foto
-      </button>
-
+      <button class="btn-subir" onclick="enviarFoto('familia')">Enviar foto</button>
       <div class="galeria" id="galeria-familia"></div>
     </div>
 
     <!-- ELLA -->
     <div class="bloque">
       <h2>Liz</h2>
-
       <input type="file" id="file-liz" accept="image/*">
-
-      <button class="btn-subir" onclick="enviarFoto('liz')">
-        Enviar foto
-      </button>
-
+      <button class="btn-subir" onclick="enviarFoto('liz')">Enviar foto</button>
       <div class="galeria" id="galeria-liz"></div>
     </div>
 
     <!-- NOSOTROS -->
     <div class="bloque">
       <h2>Nosotros</h2>
-
       <input type="file" id="file-nosotros" accept="image/*">
-
-      <button class="btn-subir" onclick="enviarFoto('nosotros')">
-        Enviar foto
-      </button>
-
+      <button class="btn-subir" onclick="enviarFoto('nosotros')">Enviar foto</button>
       <div class="galeria" id="galeria-nosotros"></div>
     </div>
 
@@ -75,13 +55,13 @@
   </div>
 
   <script>
-    // 🔐 SUPABASE (USA TUS DATOS)
-    const supabaseUrl = "https://vunamqmjquqqbjcuewfp.supabase.co";
-    const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ1bmFtcW1qcXVxcWJqY3Vld2ZwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgwNjAzMDksImV4cCI6MjA4MzYzNjMwOX0.Az5YzL_lMnaxjaR-o399mLeOctRincjK-SJGV9yHoOA";
+    // 🔐 CONFIGURA AQUÍ TUS DATOS DE SUPABASE
+    const SUPABASE_URL = "TU_SUPABASE_URL";
+    const SUPABASE_KEY = "TU_SUPABASE_PUBLIC_KEY";
 
     const supabase = window.supabase.createClient(
-      supabaseUrl,
-      supabaseKey
+      SUPABASE_URL,
+      SUPABASE_KEY
     );
 
     // 📤 SUBIR FOTO
@@ -101,14 +81,14 @@
         .upload(`${categoria}/${nombre}`, file);
 
       if (error) {
-        alert("No se pudo subir la foto 🤍");
         console.error(error);
+        alert("No se pudo subir la foto 🤍");
         return;
       }
 
       alert("Recuerdo subido, los cuidaré con el corazón 🤍");
-      cargarFotos(categoria);
       input.value = "";
+      cargarFotos(categoria);
     }
 
     // 🖼️ CARGAR FOTOS
@@ -118,7 +98,7 @@
 
       const { data, error } = await supabase.storage
         .from("fotos")
-        .list(categoria, { limit: 50 });
+        .list(categoria, { limit: 50, sortBy: { column: "created_at", order: "desc" } });
 
       if (error) {
         console.error(error);
