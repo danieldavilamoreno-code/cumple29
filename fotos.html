@@ -3,126 +3,142 @@
 <head>
   <meta charset="UTF-8">
   <title>Fotos 🤍</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Estilos globales -->
   <link rel="stylesheet" href="style.css">
 
-  <style>
-    .bloque {
-      margin-bottom: 30px;
-    }
-
-    .bloque h2 {
-      margin-bottom: 10px;
-    }
-
-    .galeria {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .galeria img {
-      width: 100%;
-      border-radius: 8px;
-    }
-  </style>
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
 <body>
 
   <div class="contenedor">
-    <h1>Fotos 🤍</h1>
+    <h1>📸 Nuestros recuerdos</h1>
+    <p class="descripcion">
+      Guarda aquí los momentos que más valoras… prometo cuidarlos 🤍
+    </p>
 
+    <!-- AMIGOS -->
     <div class="bloque">
-      <h2>📸 Amigos</h2>
-     <input type="file" accept="image/*" id="file-amigos" style="display:none">
-    <button onclick="enviarFoto('amigos')">Enviar foto</button>
+      <h2>Amigos</h2>
+
+      <input type="file" id="file-amigos" accept="image/*" style="display:none">
+
+      <button class="btn-subir" onclick="enviarFoto('amigos')">
+        Enviar foto
+      </button>
+
       <div class="galeria" id="galeria-amigos"></div>
     </div>
 
+    <!-- FAMILIA -->
     <div class="bloque">
-      <h2>👨‍👩‍👧 Familia</h2>
-     <input type="file" accept="image/*" id="file-familia" style="display:none">
-<button onclick="enviarFoto('familia')">Enviar foto</button>
+      <h2>Familia</h2>
+
+      <input type="file" id="file-familia" accept="image/*" style="display:none">
+
+      <button class="btn-subir" onclick="enviarFoto('familia')">
+        Enviar foto
+      </button>
+
       <div class="galeria" id="galeria-familia"></div>
     </div>
 
+    <!-- ELLA -->
     <div class="bloque">
-      <h2>✨ Liz</h2>
-      <input type="file" accept="image/*" id="file-liz" style="display:none">
-<button onclick="enviarFoto('liz')">Enviar foto</button>
+      <h2>Liz</h2>
+
+      <input type="file" id="file-liz" accept="image/*" style="display:none">
+
+      <button class="btn-subir" onclick="enviarFoto('liz')">
+        Enviar foto
+      </button>
+
       <div class="galeria" id="galeria-liz"></div>
     </div>
 
+    <!-- NOSOTROS -->
     <div class="bloque">
-      <h2>🤍 Nosotros</h2>
-      <input type="file" accept="image/*" id="file-nosotros" style="display:none">
-<button onclick="enviarFoto('nosotros')">Enviar foto</button>
+      <h2>Nosotros</h2>
+
+      <input type="file" id="file-nosotros" accept="image/*" style="display:none">
+
+      <button class="btn-subir" onclick="enviarFoto('nosotros')">
+        Enviar foto
+      </button>
+
       <div class="galeria" id="galeria-nosotros"></div>
     </div>
 
-    <button onclick="window.location.href='index.html'">
-      Volver
-    </button>
+    <a href="index.html" class="volver">← Volver</a>
   </div>
 
-  <!-- Supabase -->
-  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-
   <script>
-    const supabaseUrl = "https://vunamqmjquqqbjcuewfp.supabase.co";
-    const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ1bmFtcW1qcXVxcWJqY3Vld2ZwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgwNjAzMDksImV4cCI6MjA4MzYzNjMwOX0.Az5YzL_lMnaxjaR-o399mLeOctRincjK-SJGV9yHoOA";
+    // 🔐 CONFIGURA AQUÍ TU SUPABASE
+    const supabaseUrl = "TU_SUPABASE_URL";
+    const supabaseKey = "TU_SUPABASE_PUBLIC_KEY";
 
     const supabase = window.supabase.createClient(
       supabaseUrl,
       supabaseKey
     );
 
-        async function cargarFotos(categoria) {
-      const { data } = await supabase.storage
-        .from("fotos")
-        .list(categoria);
+    // 📤 SUBIR FOTO
+    function enviarFoto(categoria) {
+      const input = document.getElementById(`file-${categoria}`);
+      input.click();
 
+      input.onchange = async () => {
+        const file = input.files[0];
+        if (!file) return;
+
+        const nombre = `${Date.now()}-${file.name}`;
+
+        const { error } = await supabase.storage
+          .from("fotos")
+          .upload(`${categoria}/${nombre}`, file);
+
+        if (error) {
+          alert("No se pudo subir la foto 🤍");
+          console.error(error);
+          return;
+        }
+
+        alert("Recuerdo subido, los cuidaré con el corazón 🤍");
+        cargarFotos(categoria);
+        input.value = "";
+      };
+    }
+
+    // 🖼️ CARGAR FOTOS
+    async function cargarFotos(categoria) {
       const contenedor = document.getElementById(`galeria-${categoria}`);
       contenedor.innerHTML = "";
 
-      data.forEach(foto => {
-        const url = supabase.storage
+      const { data, error } = await supabase.storage
+        .from("fotos")
+        .list(categoria, { limit: 50, sortBy: { column: "created_at", order: "desc" } });
+
+      if (error) {
+        console.error(error);
+        return;
+      }
+
+      for (const file of data) {
+        const { data: url } = supabase.storage
           .from("fotos")
-          .getPublicUrl(`${categoria}/${foto.name}`).data.publicUrl;
+          .getPublicUrl(`${categoria}/${file.name}`);
 
         const img = document.createElement("img");
-        img.src = url;
+        img.src = url.publicUrl;
         contenedor.appendChild(img);
-      });
+      }
     }
 
+    // 🔄 CARGA INICIAL
     ["amigos", "familia", "liz", "nosotros"].forEach(cargarFotos);
-    
-    function enviarFoto(categoria) {
-  const input = document.getElementById(`file-${categoria}`);
-  input.click();
-
-  input.onchange = async () => {
-    const file = input.files[0];
-    if (!file) return;
-
-    const nombre = `${Date.now()}-${file.name}`;
-
-    const { error } = await supabase.storage
-      .from("fotos")
-      .upload(`${categoria}/${nombre}`, file);
-
-    if (!error) {
-      alert("Recuerdo subido, los cuidaré con el corazón 🤍");
-      cargarFotos(categoria);
-      input.value = "";
-    } else {
-      alert("No se pudo subir la foto 🤍");
-      console.error(error);
-    }
-  };
-}
   </script>
 
 </body>
