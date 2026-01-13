@@ -351,6 +351,15 @@ textarea {
   margin-bottom: 20px;
 }
 
+/* =========================
+   📸 AJUSTE SOLO PARA FOTOS
+   ========================= */
+
+body.fotos-page {
+  align-items: flex-start;
+  padding-top: 40px;
+}
+
 
 
 
