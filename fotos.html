@@ -35,25 +35,29 @@
 
     <div class="bloque">
       <h2>📸 Amigos</h2>
-      <input type="file" accept="image/*" onchange="subirFoto(event, 'amigos')">
+     <input type="file" accept="image/*" id="file-amigos" style="display:none">
+    <button onclick="enviarFoto('amigos')">Enviar foto</button>
       <div class="galeria" id="galeria-amigos"></div>
     </div>
 
     <div class="bloque">
       <h2>👨‍👩‍👧 Familia</h2>
-      <input type="file" accept="image/*" onchange="subirFoto(event, 'familia')">
+     <input type="file" accept="image/*" id="file-familia" style="display:none">
+<button onclick="enviarFoto('familia')">Enviar foto</button>
       <div class="galeria" id="galeria-familia"></div>
     </div>
 
     <div class="bloque">
-      <h2>✨ Ella</h2>
-      <input type="file" accept="image/*" onchange="subirFoto(event, 'ella')">
+      <h2>✨ Liz</h2>
+      <input type="file" accept="image/*" id="file-liz" style="display:none">
+<button onclick="enviarFoto('liz')">Enviar foto</button>
       <div class="galeria" id="galeria-ella"></div>
     </div>
 
     <div class="bloque">
       <h2>🤍 Nosotros</h2>
-      <input type="file" accept="image/*" onchange="subirFoto(event, 'nosotros')">
+      <input type="file" accept="image/*" id="file-nosotros" style="display:none">
+<button onclick="enviarFoto('nosotros')">Enviar foto</button>
       <div class="galeria" id="galeria-nosotros"></div>
     </div>
 
@@ -111,7 +115,7 @@
       });
     }
 
-    ["amigos", "familia", "ella", "nosotros"].forEach(cargarFotos);
+    ["amigos", "familia", "liz", "nosotros"].forEach(cargarFotos);
   </script>
 
 </body>
