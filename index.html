@@ -2,52 +2,39 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Cuenta atrás 🤍</title>
+  <title>Cuenta regresiva 🤍</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Estilos globales -->
   <link rel="stylesheet" href="style.css">
-
-  <!-- Tipografías -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 </head>
 
-  <script>
-  function bloqueado() {
-   alert("Calma, aun no 🤍\nCada cosa tiene su momento.\nPronto se abrirá para ti ✨\nTE AMO 🤍");
-  }
-</script>
-  
-<body> 
-   <div class="page-center">
-  <div class="contenedor">
-    <h1>Faltan solo…</h1>
+<body>
 
-    <div id="contador">
-      <div><span id="dias">0</span><small>Días</small></div>
-      <div><span id="horas">0</span><small>Hrs</small></div>
-      <div><span id="minutos">0</span><small>Min</small></div>
-      <div><span id="segundos">0</span><small>Seg</small></div>
-    </div>
+  <!-- CONTENEDOR CENTRAL -->
+  <div class="page-center">
+    <div class="contenedor">
 
-    <p>Un poquito más para celebrar tu día 🤍</p>
+      <h1>Faltan…</h1>
 
-    <div class="botones">
-      <button onclick="bloqueado()">📸 Fotos</button>
-      <button onclick="bloqueado()">🎁 Regalos</button>
-      <button onclick="bloqueado()">🤍 Lo que vive en mí</button>
+      <!-- CONTADOR -->
+      <div id="contador">
+        <span id="dias">00</span> días<br>
+        <span id="horas">00</span> :
+        <span id="minutos">00</span> :
+        <span id="segundos">00</span>
+      </div>
+
+      <!-- BOTONES -->
+      <button onclick="location.href='fotos.html'">📸 Fotos</button>
+      <button onclick="location.href='regalos.html'">🎁 Regalos</button>
+      <button onclick="location.href='cancion.html'">💜 Lo que vive en mí</button>
+
     </div>
   </div>
 
+  <!-- SCRIPT CONTADOR -->
   <script src="script.js"></script>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
