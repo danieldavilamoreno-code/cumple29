@@ -2,114 +2,117 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Fotos</title>
+  <title>Fotos 🤍</title>
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    .bloque {
+      margin-bottom: 30px;
+    }
+
+    .bloque h2 {
+      margin-bottom: 10px;
+    }
+
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .galeria img {
+      width: 100%;
+      border-radius: 8px;
+    }
+  </style>
 </head>
+
 <body>
 
-<main class="contenedor">
-  <h1>Nuestros recuerdos 📸</h1>
-  <p class="subtitulo">
-    Este espacio es solo tuyo.  
-    Nada se comparte, nada se pierde.  
-    Todo se guarda con cuidado. 🤍
-  </p>
+  <div class="contenedor">
+    <h1>Fotos 🤍</h1>
 
-  <!-- Selector de días -->
-  <div class="dias-selector">
-    <button class="activo" onclick="mostrarDia(1)">Día 1</button>
-    <button onclick="mostrarDia(2)">Día 2</button>
-    <button onclick="mostrarDia(3)">Día 3</button>
-    <button onclick="mostrarDia(4)">Día 4</button>
+    <div class="bloque">
+      <h2>📸 Amigos</h2>
+      <input type="file" accept="image/*" onchange="subirFoto(event, 'amigos')">
+      <div class="galeria" id="galeria-amigos"></div>
+    </div>
+
+    <div class="bloque">
+      <h2>👨‍👩‍👧 Familia</h2>
+      <input type="file" accept="image/*" onchange="subirFoto(event, 'familia')">
+      <div class="galeria" id="galeria-familia"></div>
+    </div>
+
+    <div class="bloque">
+      <h2>✨ Ella</h2>
+      <input type="file" accept="image/*" onchange="subirFoto(event, 'ella')">
+      <div class="galeria" id="galeria-ella"></div>
+    </div>
+
+    <div class="bloque">
+      <h2>🤍 Nosotros</h2>
+      <input type="file" accept="image/*" onchange="subirFoto(event, 'nosotros')">
+      <div class="galeria" id="galeria-nosotros"></div>
+    </div>
+
+    <button onclick="window.location.href='index.html'">
+      Volver
+    </button>
   </div>
 
-  <!-- Día 1 -->
-  <section id="dia1" class="dia visible">
-    <h2>Día 1 · Amigos</h2>
-    <p class="mensaje">
-      Personas que han estado contigo en distintas etapas.  
-      Aquí puedes guardar risas, momentos y recuerdos compartidos.
-    </p>
-    <div class="galeria vacia">
-      <span>Aquí vivirán esos recuerdos 🤍</span>
-    </div>
-  </section>
+  <!-- Supabase -->
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 
-  <!-- Día 2 -->
-  <section id="dia2" class="dia bloqueado">
-    <h2>Día 2 · Familia</h2>
-    <p class="mensaje">
-      Tus raíces, tu historia, tu hogar.  
-      Este espacio se abrirá cuando llegue su momento.
-    </p>
-    <div class="galeria cerrada">
-      <span>Disponible pronto</span>
-    </div>
-  </section>
+  <script>
+    const supabaseUrl = "https://TU_PROYECTO.supabase.co";
+    const supabaseKey = "TU_PUBLIC_ANON_KEY";
 
-  <!-- Día 3 -->
-  <section id="dia3" class="dia bloqueado">
-    <h2>Día 3 · Tú y yo</h2>
-    <p class="mensaje">
-      Lo que hemos construido juntos.  
-      Con calma, sin prisa.
-    </p>
-    <div class="galeria cerrada">
-      <span>Aún no</span>
-    </div>
-  </section>
+    const supabase = window.supabase.createClient(
+      supabaseUrl,
+      supabaseKey
+    );
 
-  <!-- Día 4 -->
-  <section id="dia4" class="dia bloqueado">
-    <h2>Día 4 · Tú</h2>
-    <p class="mensaje">
-      Fotos solo tuyas.  
-      Para que te veas como yo te veo.
-    </p>
-    <div class="galeria cerrada">
-      <span>Último día</span>
-    </div>
-  </section>
-</main>
+    async function subirFoto(event, categoria) {
+      const file = event.target.files[0];
+      if (!file) return;
 
-<script>
-  // 🔐 FECHA DE INICIO (YYYY, MM-1, DD)
-  const fechaInicio = new Date(2026, 0, 15); // 15 enero 2026 (ejemplo)
+      const nombre = `${Date.now()}-${file.name}`;
 
-  const hoy = new Date();
+      const { error } = await supabase.storage
+        .from("fotos")
+        .upload(`${categoria}/${nombre}`, file);
 
-  // Calcular diferencia en días
-  const diffTiempo = hoy - fechaInicio;
-  const diaActual = Math.floor(diffTiempo / (1000 * 60 * 60 * 24)) + 1;
-
-  function actualizarDias() {
-    document.querySelectorAll(".dia").forEach((dia, index) => {
-      const numeroDia = index + 1;
-      const boton = document.querySelectorAll(".dias-selector button")[index];
-
-      if (numeroDia <= diaActual) {
-        dia.classList.remove("bloqueado");
-        boton.disabled = false;
+      if (!error) {
+        cargarFotos(categoria);
       } else {
-        dia.classList.add("bloqueado");
-        boton.disabled = true;
+        alert("No se pudo subir la foto 🤍");
+        console.error(error);
       }
-    });
+    }
 
-    mostrarDia(Math.min(diaActual, 4));
-  }
+    async function cargarFotos(categoria) {
+      const { data } = await supabase.storage
+        .from("fotos")
+        .list(categoria);
 
-  function mostrarDia(n) {
-    document.querySelectorAll(".dia").forEach(d => d.classList.remove("visible"));
-    document.querySelectorAll(".dias-selector button").forEach(b => b.classList.remove("activo"));
+      const contenedor = document.getElementById(`galeria-${categoria}`);
+      contenedor.innerHTML = "";
 
-    document.getElementById("dia" + n).classList.add("visible");
-    document.querySelectorAll(".dias-selector button")[n - 1].classList.add("activo");
-  }
+      data.forEach(foto => {
+        const url = supabase.storage
+          .from("fotos")
+          .getPublicUrl(`${categoria}/${foto.name}`).data.publicUrl;
 
-  actualizarDias();
-</script>
+        const img = document.createElement("img");
+        img.src = url;
+        contenedor.appendChild(img);
+      });
+    }
 
+    ["amigos", "familia", "ella", "nosotros"].forEach(cargarFotos);
+  </script>
 
 </body>
 </html>
