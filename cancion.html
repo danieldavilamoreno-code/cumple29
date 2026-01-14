@@ -3,158 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <title>Lo que vive en mí 🤍</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Estilos globales -->
   <link rel="stylesheet" href="style.css">
-
-  <!-- Tipografías -->
- <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
-
-  <!-- Estilos SOLO de esta página -->
-  <style>
-    #mensajeDia {
-      color: #7a4a6a;
-      font-size: 14px;
-      margin-bottom: 15px;
-      display: block;
-      animation: aparecer 1.5s ease;
-    }
-
-    #tipoDia {
-      font-weight: 600;
-      margin-bottom: 5px;
-    }
-
-    @keyframes aparecer {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  </style>
 </head>
 
 <body>
   <div class="page-scroll">
-  <div class="contenedor">
-    <h1>Para ti 🤍</h1>
+    <div class="contenedor">
 
-    <p id="tipoDia"></p>
-    <p id="mensajeDia"></p>
-    <p id="guiaDia"></p>
-    
-    <form onsubmit="enviarFormulario(event)">
-      <input type="hidden" id="tipoHidden">
+      <h1>Lo que vive en mí</h1>
+      <p>
+        Este espacio es solo tuyo.  
+        Puedes volver aquí cuando quieras 🤍
+      </p>
 
-      <textarea
-        id="textoRecuerdo"
-        placeholder="Escribe aquí lo que quieras guardar…"
-        required
-      ></textarea>
+      <!-- 🎵 CANCIÓN -->
+      <div class="bloque">
+        <h2>🎵 Una canción</h2>
+        <p>Una canción que te acompañe hoy.</p>
+        <input type="text" placeholder="Nombre de la canción o enlace…">
+      </div>
 
-      <button type="submit">Guardar</button>
+      <!-- 🕯️ RECUERDO -->
+      <div class="bloque">
+        <h2>🕯️ Un recuerdo</h2>
+        <p>Algo que quieras guardar en palabras.</p>
+        <textarea rows="3" placeholder="Escribe aquí tu recuerdo…"></textarea>
+      </div>
 
-      <button
-        type="button"
-        class="volver"
-        onclick="window.location.href='index.html'"
-      >
-        Volver a la página principal
-      </button>
-    </form>
+      <!-- 💭 EMOCIÓN -->
+      <div class="bloque">
+        <h2>💭 Cómo te sientes</h2>
+        <p>Sin pensar demasiado… ¿cómo estás hoy?</p>
+        <textarea rows="3" placeholder="Hoy me siento…"></textarea>
+      </div>
+
+      <a href="index.html" class="volver">← Volver</a>
+
+    </div>
   </div>
-
-  <!-- Supabase -->
-  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-
-  <script>
-    /* 🔴 1. CONFIGURA TUS CLAVES DE SUPABASE */
-    const supabaseUrl = "https://vunamqmjquqqbjcuewfp.supabase.co";
-    const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ1bmFtcW1qcXVxcWJqY3Vld2ZwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgwNjAzMDksImV4cCI6MjA4MzYzNjMwOX0.Az5YzL_lMnaxjaR-o399mLeOctRincjK-SJGV9yHoOA";
-
-    const supabase = window.supabase.createClient(
-      supabaseUrl,
-      supabaseKey
-    );
-
-    /* 🔮 LÓGICA DEL DÍA */
- document.addEventListener("DOMContentLoaded", () => {
-
-  const tipoTexto = document.getElementById("tipoDia");
-  const mensaje = document.getElementById("mensajeDia");
-  const guia = document.getElementById("guiaDia");
-  const textarea = document.getElementById("textoRecuerdo");
-  const tipoHidden = document.getElementById("tipoHidden");
-
-  // 🔴 VERIFICACIÓN CRÍTICA
-  if (!tipoTexto || !mensaje || !guia || !textarea || !tipoHidden) {
-    console.error("Falta un elemento del DOM", {
-      tipoTexto, mensaje, guia, textarea, tipoHidden
-    });
-    return;
-  }
-
-  const inicio = new Date("2026-01-09");
-  const hoy = new Date();
-  const diff = Math.floor((hoy - inicio) / (1000 * 60 * 60 * 24));
-  const dia = ((diff % 3) + 3) % 3; // evita negativos
-
-  if (dia === 0) {
-    tipoTexto.textContent = "🎶 Hoy: una canción";
-    mensaje.textContent = "Hoy quiero que guardes una canción 🤍";
-    guia.textContent = "Escribe el nombre de una canción y por qué te acompaña.";
-    textarea.placeholder = "Ejemplo: Esta canción me calma cuando el día fue pesado…";
-    tipoHidden.value = "Canción";
-
-  } else if (dia === 1) {
-    tipoTexto.textContent = "🤍 Hoy: una emoción";
-    mensaje.textContent = "Hoy quiero que escribas cómo te sientes 🤍";
-    guia.textContent = "Ponle nombre a una emoción que esté contigo hoy.";
-    textarea.placeholder = "Ejemplo: Hoy me siento agradecida porque…";
-    tipoHidden.value = "Emoción";
-
-  } else {
-    tipoTexto.textContent = "🌙 Hoy: un recuerdo";
-    mensaje.textContent = "Hoy quiero que guardes un recuerdo bonito 🤍";
-    guia.textContent = "Guarda un recuerdo que quieras conservar.";
-    textarea.placeholder = "Ejemplo: Recuerdo cuando sonreí sin darme cuenta…";
-    tipoHidden.value = "Recuerdo";
-  }
-});
-
-    /* 💾 GUARDAR EN SUPABASE */
-    async function enviarFormulario(e) {
-      e.preventDefault();
-
-      const texto = document.getElementById("textoRecuerdo").value.trim();
-      const tipo = document.getElementById("tipoHidden").value;
-
-      if (!texto) return;
-
-      const { error } = await supabase
-        .from("momentos")
-        .insert([
-          {
-            tipo: tipo,
-            contenido: texto,
-            fecha: new Date().toISOString().split("T")[0],
-            origen: "ella"
-          }
-        ]);
-
-      if (!error) {
-        alert("Guarda aquí los momentos que más valoras… prometo cuidarlos 🤍");
-        document.getElementById("textoRecuerdo").value = "";
-      } else {
-        alert("Algo falló, pero no se perdió nada 🤍");
-        console.error(error);
-      }
-    }
-  </script>
-
 </body>
 </html>
