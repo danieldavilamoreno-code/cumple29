@@ -11,6 +11,43 @@
 <body style="display:flex; justify-content:center; padding:40px 0;">
   <div class="contenedor">
 
+    <script>
+  const SUPABASE_URL = "https://vunamqmjquqqbjcuewfp.supabase.co";
+  const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ1bmFtcW1qcXVxcWJqY3Vld2ZwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgwNjAzMDksImV4cCI6MjA4MzYzNjMwOX0.Az5YzL_lMnaxjaR-o399mLeOctRincjK-SJGV9yHoOA";
+
+  const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  async function guardar(tipo) {
+    let texto = "";
+
+    if (tipo === "cancion") {
+      texto = document.getElementById("texto-cancion").value;
+    }
+    if (tipo === "recuerdo") {
+      texto = document.getElementById("texto-recuerdo").value;
+    }
+    if (tipo === "emocion") {
+      texto = document.getElementById("texto-emocion").value;
+    }
+
+    if (!texto.trim()) {
+      alert("Escribe algo primero 🤍");
+      return;
+    }
+
+    const { error } = await sb
+      .from("emociones")
+      .insert([{ tipo, contenido: texto }]);
+
+    if (error) {
+      alert("Algo pasó, pero lo intentamos juntos 🤍");
+      console.error(error);
+    } else {
+      alert("Guardado con cariño 🤍");
+    }
+  }
+</script>
+
       <h1>Lo que vive en mí</h1>
       <p>
         Este espacio es solo tuyo.  
@@ -23,13 +60,17 @@
         <p>Una canción que te acompañe hoy.</p>
         <input type="text" placeholder="Nombre de la canción o enlace…">
       </div>
-
+    <textarea id="texto-cancion"></textarea>
+    <button onclick="guardar('cancion')">Guardar</button>
+    
       <!-- 🕯️ RECUERDO -->
       <div class="bloque">
         <h2>🕯️ Un recuerdo</h2>
         <p>Algo que quieras guardar en palabras.</p>
         <textarea rows="3" placeholder="Escribe aquí tu recuerdo…"></textarea>
       </div>
+    <textarea id="texto-recuerdo"></textarea>
+    <button onclick="guardar('recuerdo')">Guardar</button>
 
       <!-- 💭 EMOCIÓN -->
       <div class="bloque">
@@ -37,8 +78,10 @@
         <p>Sin pensar demasiado… ¿cómo estás hoy?</p>
         <textarea rows="3" placeholder="Hoy me siento…"></textarea>
       </div>
-
-      <a href="index.html" class="volver">← Volver</a>
+    <textarea id="texto-emocion"></textarea>
+    <button onclick="guardar('emocion')">Guardar</button>
+    
+    <a href="index.html" class="volver">← Volver</a>
 
   </div>
 </body>
