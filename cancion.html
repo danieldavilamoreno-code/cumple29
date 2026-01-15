@@ -42,9 +42,10 @@ const sb = window.supabase.createClient(
    const { error } = await sb
   .from("momentos")
   .insert([{
-    tipo,
+    tipo: tipo,
     contenido: texto,
-    fecha: new Date().toISOString()
+    fecha: new Date().toISOString(),
+    origen: "lo-que-vive-en-mi"
   }]);
 
     if (error) {
