@@ -40,7 +40,7 @@ const sb = window.supabase.createClient(
     }
 
     const { error } = await sb
-      .from("emociones")
+      .from("momentos")
       .insert([{ tipo, contenido: texto }]);
 
     if (error) {
