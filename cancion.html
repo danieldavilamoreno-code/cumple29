@@ -39,9 +39,13 @@ const sb = window.supabase.createClient(
       return;
     }
 
-    const { error } = await sb
-      .from("momentos")
-      .insert([{ tipo, contenido: texto }]);
+   const { error } = await sb
+  .from("momentos")
+  .insert([{
+    tipo,
+    contenido: texto,
+    fecha: new Date().toISOString()
+  }]);
 
     if (error) {
       alert("Algo pasó, pero lo intentamos juntos 🤍");
