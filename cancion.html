@@ -76,16 +76,16 @@ const sb = window.supabase.createClient(
       <div class="bloque">
         <h2>🕯️ Un recuerdo</h2>
         <p>Algo que quieras guardar en palabras.</p>
-        <textarea rows="3" placeholder="Escribe aquí tu recuerdo…"></textarea>
       </div>
+    <textarea id="texto-recuerdo"></textarea>
     <button onclick="guardar('recuerdo')">Guardar</button>
 
       <!-- 💭 EMOCIÓN -->
       <div class="bloque">
         <h2>💭 Cómo te sientes</h2>
         <p>Sin pensar demasiado… ¿cómo estás hoy?</p>
-        <textarea rows="3" placeholder="Hoy me siento…"></textarea>
       </div>
+    <textarea id="texto-emocion"></textarea>
     <button onclick="guardar('emocion')">Guardar</button>
     
     <a href="index.html" class="volver">← Volver</a>
