@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mi diario 🤍</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body style="display:flex; justify-content:center; padding:40px 0;">
+  <div class="contenedor">
+    <h1>Lo que he guardado 🤍</h1>
+
+    <section>
+      <h2>🎵 Canciones</h2>
+      <div id="lista-canciones"></div>
+    </section>
+
+    <section>
+      <h2>🕯️ Recuerdos</h2>
+      <div id="lista-recuerdos"></div>
+    </section>
+
+    <section>
+      <h2>💭 Emociones</h2>
+      <div id="lista-emociones"></div>
+    </section>
+
+    <a href="cancion.html" class="boton-diario" style="margin-top:40px;">
+      Volver 🤍
+    </a>
+  </div>
+
+  <script>
+    const SUPABASE_URL = "TU_URL";
+    const SUPABASE_KEY = "TU_KEY";
+    const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    async function cargarMomentos() {
+      const { data, error } = await sb
+        .from("momentos")
+        .select("*")
+        .eq("origen", "lo-que-vive-en-mi")
+        .order("fecha", { ascending: true });
+
+      if (error) {
+        console.error(error);
+        return;
+      }
+
+      data.forEach(item => {
+        const p = document.createElement("p");
+        p.textContent = item.contenido;
+
+        if (item.tipo === "cancion") {
+          document.getElementById("lista-canciones").appendChild(p);
+        }
+        if (item.tipo === "recuerdo") {
+          document.getElementById("lista-recuerdos").appendChild(p);
+        }
+        if (item.tipo === "emocion") {
+          document.getElementById("lista-emociones").appendChild(p);
+        }
+      });
+    }
+
+    cargarMomentos();
+  </script>
+</body>
+</html>
