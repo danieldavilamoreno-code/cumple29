@@ -57,8 +57,26 @@ div.className = "entrada-diario";
 div.textContent = item.contenido;
 
         if (item.tipo === "cancion") {
-          document.getElementById("lista-canciones").appendChild(div);
-        }
+  const div = document.createElement("div");
+  div.className = "entrada-diario";
+
+  const texto = document.createElement("p");
+  texto.textContent = item.contenido;
+
+  const link = document.createElement("a");
+  link.href = "https://open.spotify.com/search/" + encodeURIComponent(item.contenido);
+  link.target = "_blank";
+  link.textContent = "🎧 Escuchar en Spotify";
+  link.style.display = "inline-block";
+  link.style.marginTop = "8px";
+  link.style.fontWeight = "500";
+
+  div.appendChild(texto);
+  div.appendChild(link);
+
+  document.getElementById("lista-canciones").appendChild(div);
+}
+
         if (item.tipo === "recuerdo") {
           document.getElementById("lista-recuerdos").appendChild(div);
         }
