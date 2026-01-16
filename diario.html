@@ -57,13 +57,13 @@ div.className = "entrada-diario";
 div.textContent = item.contenido;
 
         if (item.tipo === "cancion") {
-          document.getElementById("lista-canciones").appendChild(p);
+          document.getElementById("lista-canciones").appendChild(div);
         }
         if (item.tipo === "recuerdo") {
-          document.getElementById("lista-recuerdos").appendChild(p);
+          document.getElementById("lista-recuerdos").appendChild(div);
         }
         if (item.tipo === "emocion") {
-          document.getElementById("lista-emociones").appendChild(p);
+          document.getElementById("lista-emociones").appendChild(div);
         }
       });
     }
