@@ -106,8 +106,9 @@ const sb = window.supabase.createClient(
         document.getElementById(`lista-${cat}`).innerHTML = "";
       });
 
-      data.forEach(regalo => {
-        const li = document.createElement("li");
+      if (regalo.cumplido) {
+  li.classList.add("regalo-animado");
+}
 
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
@@ -131,15 +132,31 @@ const sb = window.supabase.createClient(
       });
     }
 
-    async function marcarCumplido(id, estado) {
-      await sb
-        .from("regalos")
-        .update({ cumplido: estado })
-        .eq("id", id);
+  async function marcarCumplido(id, estado) {
+  await sb
+    .from("regalos")
+    .update({ cumplido: estado })
+    .eq("id", id);
 
-      cargarRegalos();
-    }
+  if (estado) {
+    mostrarMensajeCumplido();
+  }
 
+  cargarRegalos();
+}
+
+    function mostrarMensajeCumplido() {
+  const mensaje = document.createElement("div");
+  mensaje.className = "mensaje-cumplido";
+  mensaje.textContent = "Este ya se cumplió 🤍";
+
+  const contenedor = document.querySelector(".contenedor");
+  contenedor.appendChild(mensaje);
+
+  setTimeout(() => {
+    mensaje.remove();
+  }, 2500);
+}
     cargarRegalos();
   </script>
 </body>
