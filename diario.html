@@ -52,8 +52,9 @@ const sb = window.supabase.createClient(
       }
 
       data.forEach(item => {
-        const p = document.createElement("p");
-        p.textContent = item.contenido;
+       const div = document.createElement("div");
+div.className = "entrada-diario";
+div.textContent = item.contenido;
 
         if (item.tipo === "cancion") {
           document.getElementById("lista-canciones").appendChild(p);
