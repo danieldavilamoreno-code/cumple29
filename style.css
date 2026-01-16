@@ -206,3 +206,13 @@ textarea {
   box-shadow: 0 6px 18px rgba(0,0,0,0.08);
 }
 
+.entrada-diario a {
+  color: #b48cff;
+  text-decoration: none;
+}
+
+.entrada-diario a:hover {
+  text-decoration: underline;
+}
+
+
