@@ -106,13 +106,16 @@ const sb = window.supabase.createClient(
         document.getElementById(`lista-${cat}`).innerHTML = "";
       });
 
-      if (regalo.cumplido) {
-  li.classList.add("regalo-animado");
-}
+      data.forEach(regalo => {
+  const li = document.createElement("li");
 
-        const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.checked = regalo.cumplido;
+  if (regalo.cumplido) {
+    li.classList.add("regalo-animado");
+  }
+
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.checked = regalo.cumplido;
 
         checkbox.onchange = () => marcarCumplido(regalo.id, checkbox.checked);
 
