@@ -1,45 +1,144 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Regalos 🤍</title>
 
-  <!-- Estilos globales -->
-  <link rel="stylesheet" href="style.css">
-
-  <!-- Tipografías -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
-<body>
-
-  <div class="page-scroll">
+<body style="display:flex; justify-content:center; padding:40px 0;">
   <div class="contenedor">
 
-    <h1>🎁 ¿Qué te haría ilusión?</h1>
-    <p>Aquí puedes escribir las cosas que te ilusionan.  
-  Algunas llegarán pronto… otras con el tiempo.🤍</p>
+    <h1>Regalos 🤍</h1>
+    <p class="descripcion">
+      Aquí puedes escribir las cosas que te ilusionan.
+      Algunas llegarán pronto… otras con el tiempo.
+    </p>
 
-    <form onsubmit="guardarRegalos(event)">
-      <input type="text" placeholder="Algo que te gustaría recibir">
-      <input type="text" placeholder="Algo que te gustaría hacer">
-      <input type="text" placeholder="Algo que deseas mucho">
+    <!-- 🎀 DETALLES -->
+    <section>
+      <h2>🎀 Detalles pequeños</h2>
 
-      <button type="submit">Guardar</button>
+      <div class="input-grupo">
+        <input type="text" id="input-detalle" placeholder="Escribe un detalle…" />
+        <button onclick="agregarRegalo('detalle')">Agregar</button>
+      </div>
 
-      <button class="volver" onclick="window.location.href='index.html'">
-        Volver a la página principal
-      </button>
-    </form>
-    
+      <ul id="lista-detalle"></ul>
+    </section>
+
+    <!-- ✨ EXPERIENCIAS -->
+    <section>
+      <h2>✨ Experiencias</h2>
+
+      <div class="input-grupo">
+        <input type="text" id="input-experiencia" placeholder="Escribe una experiencia…" />
+        <button onclick="agregarRegalo('experiencia')">Agregar</button>
+      </div>
+
+      <ul id="lista-experiencia"></ul>
+    </section>
+
+    <!-- 🌙 SUEÑOS -->
+    <section>
+      <h2>🌙 Sueños grandes</h2>
+
+      <div class="input-grupo">
+        <input type="text" id="input-sueno" placeholder="Escribe un sueño…" />
+        <button onclick="agregarRegalo('sueno')">Agregar</button>
+      </div>
+
+      <ul id="lista-sueno"></ul>
+    </section>
+
+    <a href="index.html" class="boton-diario" style="margin-top:40px;">
+      Volver 🤍
+    </a>
+
   </div>
-  
-  <script>
-    function guardarRegalos(e) {
-      e.preventDefault();
-      alert("Se guardaron correctamente los momentos que más valoras, prometo cuidarlos 🤍.");
-    }
-  </script>
 
+  <script>
+    const SUPABASE_URL = "TU_SUPABASE_URL";
+    const SUPABASE_KEY = "TU_SUPABASE_KEY";
+
+    const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    async function agregarRegalo(categoria) {
+      const input = document.getElementById(`input-${categoria}`);
+      const texto = input.value.trim();
+
+      if (!texto) {
+        alert("Escribe algo primero 🤍");
+        return;
+      }
+
+      const { error } = await sb.from("regalos").insert([{
+        contenido: texto,
+        categoria: categoria,
+        cumplido: false
+      }]);
+
+      if (error) {
+        console.error(error);
+        alert("Algo pasó, pero lo intentamos juntos 🤍");
+      } else {
+        input.value = "";
+        cargarRegalos();
+      }
+    }
+
+    async function cargarRegalos() {
+      const { data, error } = await sb
+        .from("regalos")
+        .select("*")
+        .order("created_at", { ascending: true });
+
+      if (error) {
+        console.error(error);
+        return;
+      }
+
+      ["detalle", "experiencia", "sueno"].forEach(cat => {
+        document.getElementById(`lista-${cat}`).innerHTML = "";
+      });
+
+      data.forEach(regalo => {
+        const li = document.createElement("li");
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = regalo.cumplido;
+
+        checkbox.onchange = () => marcarCumplido(regalo.id, checkbox.checked);
+
+        const texto = document.createElement("span");
+        texto.textContent = regalo.contenido;
+
+        if (regalo.cumplido) {
+          texto.classList.add("regalo-cumplido");
+        }
+
+        li.appendChild(checkbox);
+        li.appendChild(texto);
+
+        document
+          .getElementById(`lista-${regalo.categoria}`)
+          .appendChild(li);
+      });
+    }
+
+    async function marcarCumplido(id, estado) {
+      await sb
+        .from("regalos")
+        .update({ cumplido: estado })
+        .eq("id", id);
+
+      cargarRegalos();
+    }
+
+    cargarRegalos();
+  </script>
 </body>
 </html>
