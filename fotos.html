@@ -73,8 +73,8 @@ const sb = window.supabase.createClient(
        📤 SUBIR FOTO
        ============================== */
 
-   async function enviarFoto(categoria) {
-  const input = document.getElementById(`file-${categoria}`);
+   async function enviarFoto() {
+  const input = document.getElementById("fotoInput");
   const archivos = input.files;
 
   if (!archivos || archivos.length === 0) {
@@ -82,10 +82,11 @@ const sb = window.supabase.createClient(
     return;
   }
 
-  const categoria = document.getElementById("categoria").value;
+  // 👇 IMPORTANTE: usamos otra variable, NO 'categoria'
+  const categoriaSeleccionada = document.getElementById("categoria").value;
 
   for (let archivo of archivos) {
-    const nombreArchivo = `${categoria}/${Date.now()}-${archivo.name}`;
+    const nombreArchivo = `${categoriaSeleccionada}/${Date.now()}-${archivo.name}`;
 
     const { error } = await sb
       .storage
@@ -100,7 +101,6 @@ const sb = window.supabase.createClient(
   }
 
   input.value = "";
-
   alert("Recuerdos subidos, los cuidaré con el corazón 🤍");
 }
 
