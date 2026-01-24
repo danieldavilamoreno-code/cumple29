@@ -1,7 +1,7 @@
 // ===============================
 // ⏳ CUENTA ATRÁS
 // ===============================
-const fechaCumple = new Date(2026, 0, 26, 0, 0, 0);
+const fechaCumple = new Date(2026, 0, 26, 0, 0, 1);
 
 function actualizarValor(id, nuevoValor) {
   const el = document.getElementById(id);
@@ -23,6 +23,15 @@ function actualizarContador() {
   const horas = Math.floor((diferencia / (1000 * 60 * 60)) % 24);
   const minutos = Math.floor((diferencia / (1000 * 60)) % 60);
   const segundos = Math.floor((diferencia / 1000) % 60);
+
+  // 🎬 Mostrar botón del video cuando llega a 0
+if (diferencia <= 0) {
+  const btnVideo = document.getElementById("btnVideo");
+  if (btnVideo) {
+    btnVideo.style.display = "inline-block";
+  }
+  return;
+}
 
   actualizarValor("dias", dias);
   actualizarValor("horas", horas);
@@ -56,4 +65,5 @@ function controlarBloqueos() {
 }
 
 controlarBloqueos();
+
 
