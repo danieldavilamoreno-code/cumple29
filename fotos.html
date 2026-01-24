@@ -22,7 +22,7 @@
     <!-- AMIGOS -->
     <div class="bloque">
       <h2>Amigos</h2>
-      <input type="file" id="file-amigos" accept="image/*">
+      <input type="file" id="file-amigos" accept="image/*"multiple>
       <button class="btn-subir" onclick="enviarFoto('amigos')">Enviar foto</button>
       <div class="galeria" id="galeria-amigos"></div>
     </div>
@@ -30,7 +30,7 @@
     <!-- FAMILIA -->
     <div class="bloque">
       <h2>Familia</h2>
-      <input type="file" id="file-familia" accept="image/*">
+      <input type="file" id="file-familia" accept="image/*"multiple>
       <button class="btn-subir" onclick="enviarFoto('familia')">Enviar foto</button>
       <div class="galeria" id="galeria-familia"></div>
     </div>
@@ -38,7 +38,7 @@
     <!-- ELLA -->
     <div class="bloque">
       <h2>Liz</h2>
-      <input type="file" id="file-liz" accept="image/*">
+      <input type="file" id="file-liz" accept="image/*"multiple>
       <button class="btn-subir" onclick="enviarFoto('liz')">Enviar foto</button>
       <div class="galeria" id="galeria-liz"></div>
     </div>
@@ -46,7 +46,7 @@
     <!-- NOSOTROS -->
     <div class="bloque">
       <h2>Nosotros</h2>
-      <input type="file" id="file-nosotros" accept="image/*">
+      <input type="file" id="file-nosotros" accept="image/*"multiple>
       <button class="btn-subir" onclick="enviarFoto('nosotros')">Enviar foto</button>
       <div class="galeria" id="galeria-nosotros"></div>
     </div>
@@ -73,31 +73,36 @@ const sb = window.supabase.createClient(
        📤 SUBIR FOTO
        ============================== */
 
-    async function enviarFoto(categoria) {
-      const input = document.getElementById(`file-${categoria}`);
-      const file = input.files[0];
+   async function enviarFoto(categoria) {
+  const input = document.getElementById(`file-${categoria}`);
+  const archivos = input.files;
 
-      if (!file) {
-        alert("Primero selecciona una foto 🤍");
-        return;
-      }
+  if (!archivos || archivos.length === 0) {
+    alert("Selecciona al menos una foto 🤍");
+    return;
+  }
 
-      const nombre = `${Date.now()}-${file.name}`;
+  const categoria = document.getElementById("categoria").value;
 
-      const { error } = await sb.storage
-        .from("fotos")
-        .upload(`${categoria}/${nombre}`, file);
+  for (let archivo of archivos) {
+    const nombreArchivo = `${categoria}/${Date.now()}-${archivo.name}`;
 
-      if (error) {
-        console.error(error);
-        alert("No se pudo subir la foto 🤍");
-        return;
-      }
+    const { error } = await sb
+      .storage
+      .from("fotos")
+      .upload(nombreArchivo, archivo);
 
-      alert("Recuerdo subido, los cuidaré con el corazón 🤍");
-      input.value = "";
-      cargarFotos(categoria);
+    if (error) {
+      console.error(error);
+      alert("Hubo un problema subiendo una foto 💔");
+      return;
     }
+  }
+
+  input.value = "";
+
+  alert("Recuerdos subidos, los cuidaré con el corazón 🤍");
+}
 
     /* ==============================
        🖼️ CARGAR FOTOS
