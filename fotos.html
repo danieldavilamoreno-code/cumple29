@@ -82,11 +82,8 @@ const sb = window.supabase.createClient(
     return;
   }
 
-  // 👇 IMPORTANTE: usamos otra variable, NO 'categoria'
-  const categoriaSeleccionada = document.getElementById("categoria").value;
-
   for (let archivo of archivos) {
-    const nombreArchivo = `${categoriaSeleccionada}/${Date.now()}-${archivo.name}`;
+    const nombreArchivo = `${categoria}/${Date.now()}-${archivo.name}`;
 
     const { error } = await sb
       .storage
@@ -102,7 +99,11 @@ const sb = window.supabase.createClient(
 
   input.value = "";
   alert("Recuerdos subidos, los cuidaré con el corazón 🤍");
+
+  // Recarga la galería de esa categoría
+  cargarFotos(categoria);
 }
+
 
     /* ==============================
        🖼️ CARGAR FOTOS
