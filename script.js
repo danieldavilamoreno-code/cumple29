@@ -1,7 +1,7 @@
 // ===============================
 // ⏳ CUENTA ATRÁS
 // ===============================
-const fechaCumple = new Date(2026, 0, 26, 0, 0, 0);
+let fechaCumple = new Date(2026, 0, 26, 0, 0, 0);
 
 function actualizarValor(id, nuevoValor) {
   const el = document.getElementById(id);
@@ -65,6 +65,14 @@ function controlarBloqueos() {
 }
 
 controlarBloqueos();
+
+const btnSiguienteFecha = document.getElementById("btnSiguienteFecha");
+
+if (btnSiguienteFecha) {
+  btnSiguienteFecha.onclick = () => {
+    fechaCumple = new Date(2026, 1, 14, 0, 0, 0);
+  };
+}
 
 
 
