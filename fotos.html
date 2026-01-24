@@ -74,7 +74,7 @@ const sb = window.supabase.createClient(
        ============================== */
 
    async function enviarFoto() {
-  const input = document.getElementById("fotoInput");
+  const input = document.getElementById(`file-${categoria}`);
   const archivos = input.files;
 
   if (!archivos || archivos.length === 0) {
