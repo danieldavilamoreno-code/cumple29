@@ -108,6 +108,9 @@
     const bucket = "fotos-amigos";
     const contenedor = document.getElementById("contenedor");
 
+    let recuerdos = [];
+let indice = 0;
+
     async function cargarRecuerdos() {
   const { data, error } = await sb
     .from("recuerdos-amigos")
