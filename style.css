@@ -271,4 +271,48 @@ li {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* ===== BODY (SOLO FONDO) ===== */
+
+.visor {
+  height: calc(100vh - 140px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.pagina {
+  max-width: 700px;
+  width: 100%;
+}
+
+.articulo {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.articulo img {
+  max-height: 45vh;
+  object-fit: cover;
+}
+
+button#prev,
+button#next {
+  background: none;
+  border: none;
+  font-size: 2.5em;
+  cursor: pointer;
+  color: #888;
+  transition: transform 0.2s, color 0.2s;
+}
+
+button#prev:hover,
+button#next:hover {
+  color: #000;
+  transform: scale(1.1);
+}
+
 
