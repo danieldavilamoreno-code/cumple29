@@ -348,5 +348,20 @@ button#next:hover {
   }
 }
 
+@media (min-width: 768px) {
+  .visor {
+    gap: 12px;
+  }
+
+  button#prev {
+    margin-right: 8px;
+  }
+
+  button#next {
+    margin-left: 8px;
+  }
+}
+
+
 
 
