@@ -108,6 +108,10 @@
         .select("*")
         .order("created_at", { ascending: true });
 
+      console.log("DATA:", data);
+console.log("ERROR:", error);
+
+
       if (error) {
         console.error(error);
         contenedor.innerHTML = "<p>Error al cargar los recuerdos.</p>";
