@@ -316,3 +316,37 @@ button#next:hover {
 }
 
 
+/* ---------- AJUSTES DESKTOP ---------- */
+@media (min-width: 768px) {
+
+  .visor {
+    max-width: 900px;
+    margin: auto;
+    height: calc(100vh - 180px);
+  }
+
+  .pagina {
+    max-width: 520px;
+  }
+
+  .articulo {
+    padding: 20px;
+  }
+
+  .articulo img {
+    max-height: 320px;
+  }
+
+  .mensaje {
+    font-size: 1.05em;
+  }
+
+  button#prev,
+  button#next {
+    align-self: center;
+    height: fit-content;
+  }
+}
+
+
+
