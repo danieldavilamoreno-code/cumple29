@@ -212,3 +212,29 @@ button#next:hover {
     font-size: 2.5rem;
   }
 }
+
+/* ===== AJUSTE REVISTA EN CELULAR ===== */
+@media (max-width: 600px) {
+
+  .pagina {
+    height: calc(100vh - 220px);
+  }
+
+  .articulo {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .articulo img {
+    max-height: 220px;
+    flex-shrink: 0;
+  }
+
+  .mensaje {
+    overflow-y: auto;
+    flex-grow: 1;
+    padding-right: 6px;
+  }
+}
+
