@@ -109,41 +109,52 @@
     const contenedor = document.getElementById("contenedor");
 
     async function cargarRecuerdos() {
-      const { data, error } = await sb
-        .from("recuerdos-amigos")
-        .select("*")
-        .order("created_at", { ascending: true });
+  const { data, error } = await sb
+    .from("recuerdos-amigos")
+    .select("*")
+    .order("created_at", { ascending: true });
 
-      console.log("DATA:", data);
-console.log("ERROR:", error);
+  if (error) {
+    console.error(error);
+    return;
+  }
 
+  recuerdos = data;
+  mostrarRecuerdo();
+}
 
-      if (error) {
-        console.error(error);
-        contenedor.innerHTML = "<p>Error al cargar los recuerdos.</p>";
-        return;
-      }
+function mostrarRecuerdo() {
+  const contenedor = document.getElementById("contenedor");
+  const r = recuerdos[indice];
 
-      data.forEach(recuerdo => {
-        const articulo = document.createElement("div");
-        articulo.className = "articulo";
+  let imagenHTML = "";
+  if (r.foto_nombre) {
+    const url = `${SUPABASE_URL}/storage/v1/object/public/fotos-amigos/${r.foto_nombre}`;
+    imagenHTML = `<img src="${url}" alt="Recuerdo">`;
+  }
 
-        let imagenHTML = "";
-        if (recuerdo.foto_nombre) {
-          const url = `${SUPABASE_URL}/storage/v1/object/public/${bucket}/${recuerdo.foto_nombre}`;
-          imagenHTML = `<img src="${url}" alt="Recuerdo">`;
-        }
+  contenedor.innerHTML = `
+    <div class="articulo">
+      ${imagenHTML}
+      <div class="mensaje">“${r.mensaje}”</div>
+      <div class="autor">— ${r.autor || "Alguien que te ama"}</div>
+    </div>
+  `;
+}
 
-        articulo.innerHTML = `
-          ${imagenHTML}
-          <div class="mensaje">“${recuerdo.mensaje}”</div>
-          <div class="autor">— ${recuerdo.autor || "Alguien que te ama"}</div>
-        `;
+document.getElementById("prev").onclick = () => {
+  if (indice > 0) {
+    indice--;
+    mostrarRecuerdo();
+  }
+};
 
-        contenedor.appendChild(articulo);
-      });
-    }
-
+document.getElementById("next").onclick = () => {
+  if (indice < recuerdos.length - 1) {
+    indice++;
+    mostrarRecuerdo();
+  }
+};
     cargarRecuerdos();
   </script>
 
